@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Desk Calendar 2027</title>
+  <meta name="description" content="A desk calendar of my photographs for 2027, with a full planner page behind every photograph. Free delivery across Malaysia and Singapore.">
+  <meta name="theme-color" content="#efefed">
+  <!-- Link previews: replace the relative image path with the full https:// address once the domain is live. -->
+  <meta property="og:title" content="Desk Calendar 2027">
+  <meta property="og:description" content="Photographed and designed by me. Made for friends, and friends of friends.">
+  <meta property="og:image" content="assets/cover.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/calendar3d.css">
+  <style>
+    /* ------------------------------------------------------------ review tabs (remove once a design is chosen) */
+    .review { position: relative; z-index: 60; display: flex; gap: 4px; padding: calc(6px + env(safe-area-inset-top, 0px)) max(8px, env(safe-area-inset-right, 0px)) 6px max(8px, env(safe-area-inset-left, 0px)); background: #0d0d0d; font: 500 12.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .review a { flex: 1; display: grid; gap: 3px; justify-items: center; padding: 8px 4px 7px; border-radius: 9px; color: #d6d6d6; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+    .review a small { font-size: 10px; color: #8d8d8d; letter-spacing: .02em; }
+    .review a[aria-current] { background: #fff; color: #0d0d0d; }
+    .review a[aria-current] small { color: #6b6b6b; }
+
+    /* ------------------------------------------------------------ tokens */
+    :root {
+      --bg: #efefed;
+      --bg-2: #e6e6e3;
+      --white: #ffffff;
+      --ink: #0f0f0f;
+      --ink-2: #3c3c3a;
+      --muted: #74746f;
+      --line: #d6d6d1;
+      --accent: #c47c2c;
+      --display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+      --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      --gutter: max(20px, env(safe-area-inset-left, 0px));
+      --nav: 56px;
+      color-scheme: light;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; -webkit-tap-highlight-color: transparent; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -.04em; line-height: .98; }
+    .mono { font-family: var(--mono); font-size: 11px; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+    :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+    /* ------------------------------------------------------------ nav */
+    .nav { position: sticky; top: 0; z-index: 50; height: var(--nav); transition: background-color .4s, box-shadow .4s; }
+    .nav.solid { background: rgba(239,239,237,.84); -webkit-backdrop-filter: saturate(160%) blur(18px); backdrop-filter: saturate(160%) blur(18px); box-shadow: 0 1px 0 var(--line); }
+    .nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: -.02em; text-decoration: none; }
+    .nav-order { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; background: var(--ink); color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; }
+    .nav-order svg { width: 14px; height: 14px; }
+
+    .pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+
+    /* ------------------------------------------------------------ hero */
+    .hero { height: 480vh; height: 480svh; margin-top: calc(var(--nav) * -1); }
+    .hero .pin { background: linear-gradient(180deg, #f4f4f2 0%, #ececea 58%, #e2e2df 58.2%, #e9e9e6 100%); }
+    .hero-title { position: absolute; left: var(--gutter); right: var(--gutter); top: calc(var(--nav) + 3.2svh); display: grid; gap: 14px; will-change: transform, opacity; }
+    .hero h1 { font-size: clamp(54px, 16.5vw, 150px); }
+    .hero-title p.sub { font-size: 15px; color: var(--ink-2); max-width: 24em; }
+    .hero-cal { position: absolute; inset: 0; display: grid; place-items: center; will-change: transform; }
+    .hero-cal .c3 { --w: min(60vw, 34svh, 330px); }
+    .dot { position: absolute; left: 0; top: 0; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--ink); color: #fff; font: 500 11px/22px var(--mono); text-align: center; opacity: 0; will-change: opacity, transform; box-shadow: 0 0 0 3px rgba(255,255,255,.75); }
+    .legend { position: absolute; left: var(--gutter); right: var(--gutter); bottom: calc(4.5svh + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+    .legend div { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; align-items: start; opacity: 0; will-change: opacity, transform; }
+    .legend b { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font: 500 11px/22px var(--mono); text-align: center; }
+    .legend span { font-size: 12.5px; line-height: 1.35; }
+    .legend span em { display: block; font-style: normal; color: var(--muted); font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; margin-top: 2px; }
+    .fig { position: absolute; left: var(--gutter); bottom: calc(4.5svh + env(safe-area-inset-bottom, 0px)); display: flex; gap: 10px; align-items: baseline; opacity: 0; will-change: opacity; }
+    .fig b { font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: -.03em; color: var(--ink); text-transform: none; }
+    @media (max-width: 899px) { #figA { display: none; } }
+    .scroll-hint { position: absolute; right: var(--gutter); bottom: calc(4.5svh + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 8px; }
+    .scroll-hint svg { width: 14px; height: 14px; animation: nudge 1.8s ease-in-out infinite; }
+    @keyframes nudge { 50% { transform: translateY(4px); } }
+
+    /* ------------------------------------------------------------ figures */
+    .figures { padding: 100px 0 30px; }
+    .figures .grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); }
+    .figures .grid > div { padding: 22px 0 30px; border-bottom: 1px solid var(--line); }
+    .figures .grid > div:nth-child(odd) { padding-right: 16px; border-right: 1px solid var(--line); }
+    .figures .grid > div:nth-child(even) { padding-left: 16px; }
+    .figures .big { font-family: var(--display); font-weight: 600; font-size: clamp(46px, 13vw, 96px); letter-spacing: -.05em; line-height: 1; margin: 18px 0 8px; }
+    .figures .big small { font-size: .38em; letter-spacing: -.02em; margin-right: 4px; vertical-align: .9em; }
+    .figures p { font-size: 13.5px; color: var(--ink-2); }
+
+    /* ------------------------------------------------------------ planner, as a technical drawing */
+    .tour { height: 620vh; height: 620svh; }
+    .tour .pin { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; background: var(--bg); padding-top: calc(var(--nav) + 12px); }
+    .tour-head { display: flex; justify-content: space-between; align-items: end; gap: 12px; padding: 0 var(--gutter) 14px; }
+    .tour-head h2 { font-size: clamp(34px, 9.6vw, 72px); }
+    .tour-view { position: relative; overflow: hidden; background: #e4e4e1; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 24px 24px; background-position: -1px -1px; }
+    .tour-frame { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; box-shadow: 0 0 0 1px rgba(0,0,0,.06), 0 24px 50px -24px rgba(0,0,0,.35); }
+    .tour-frame img { width: 100%; aspect-ratio: 700 / 905; }
+    .tour-panel { background: var(--white); padding: 16px var(--gutter) calc(18px + env(safe-area-inset-bottom, 0px)); }
+    .segs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-bottom: 14px; }
+    .segs i { height: 2px; background: var(--line); position: relative; overflow: hidden; }
+    .segs i b { position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: 0 0; will-change: transform; }
+    .tcaps { position: relative; height: 104px; }
+    .tcap { position: absolute; inset: 0; display: grid; align-content: start; gap: 6px; opacity: 0; will-change: opacity, transform; }
+    .tcap h3 { font-size: 24px; letter-spacing: -.03em; line-height: 1.1; }
+    .tcap p { color: var(--ink-2); font-size: 14px; }
+
+    /* ------------------------------------------------------------ months: sheets that stack as you scroll */
+    .months { padding: 110px 0 60px; }
+    .months-head { display: grid; gap: 14px; margin-bottom: 40px; }
+    .months-head h2 { font-size: clamp(40px, 11vw, 96px); }
+    .stack { position: relative; }
+    .sheet {
+      position: sticky; top: calc(var(--nav) + 14px + var(--i) * 6px);
+      margin: 0 auto 7svh; width: min(100%, 520px);
+      background: var(--white); padding: 14px 14px 18px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.05), 0 20px 40px -26px rgba(0,0,0,.4);
+      transform-origin: 50% 0; will-change: transform;
+    }
+    .sheet .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+    .sheet .row b { font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: -.03em; }
+    .sheet img { width: 100%; aspect-ratio: 800 / 1035; max-height: 56svh; object-fit: contain; background: #fff; }
+    .sheet .cap { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 13.5px; }
+    .sheet .cap span:last-child { color: var(--muted); text-align: right; }
+    .sheet .dim { position: absolute; inset: 0; background: #0f0f0f; opacity: 0; pointer-events: none; will-change: opacity; }
+
+    /* ------------------------------------------------------------ data + order */
+    .data { padding: 90px 0; }
+    .data h2 { font-size: clamp(40px, 11vw, 96px); margin: 14px 0 34px; }
+    .table { border-top: 1px solid var(--ink); }
+    .table div { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 14px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .table dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+    .table dd { margin: 0; font-size: 15px; }
+    dl { margin: 0; }
+
+    .order { background: var(--white); padding: 90px 0 100px; overflow: hidden; }
+    .order .wrap { display: grid; gap: 34px; }
+    .order-cal { justify-self: center; padding: 10px 0; }
+    .order-cal .c3 { --w: min(56vw, 300px); }
+    .order h2 { font-size: clamp(44px, 13vw, 110px); }
+    .order .price { font-family: var(--display); font-weight: 600; font-size: 44px; letter-spacing: -.04em; }
+    .order .price small { font-size: 18px; letter-spacing: 0; margin-right: 6px; vertical-align: 15px; }
+    .order .ship { color: var(--ink-2); max-width: 26em; }
+    .btn { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 0 22px; background: var(--ink); color: #fff; text-decoration: none; font-family: var(--display); font-weight: 500; font-size: 17px; letter-spacing: -.01em; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+    .btn svg { width: 20px; height: 20px; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+    .btn:active { transform: scale(.985); }
+    @media (hover: hover) { .btn:hover svg { transform: translateX(4px); } }
+
+    footer { background: var(--white); padding: 0 0 calc(30px + env(safe-area-inset-bottom, 0px)); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
+
+    [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity .9s cubic-bezier(.2,.75,.2,1), transform .9s cubic-bezier(.2,.75,.2,1); transition-delay: var(--d, 0s); }
+    [data-reveal].in { opacity: 1; transform: none; }
+
+    .toast { position: fixed; left: 50%; top: calc(66px + env(safe-area-inset-top, 0px)); z-index: 80; transform: translate(-50%, -10px); opacity: 0; background: var(--ink); color: #fff; padding: 11px 16px; font-size: 13px; transition: opacity .3s, transform .4s; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (min-width: 900px) {
+      .hero-title { left: max(var(--gutter), calc((100vw - 1200px) / 2 + 20px)); right: auto; max-width: 60vw; }
+      .fig { left: max(var(--gutter), calc((100vw - 1200px) / 2 + 20px)); }
+      .legend { left: auto; right: max(var(--gutter), calc((100vw - 1200px) / 2)); width: 380px; grid-template-columns: 1fr; bottom: 12svh; }
+      .figures .grid { grid-template-columns: repeat(4, 1fr); }
+      .figures .grid > div { padding: 22px 20px 34px !important; border-right: 1px solid var(--line); }
+      .figures .grid > div:last-child { border-right: 0; }
+      .tour .pin { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); padding-left: max(var(--gutter), calc((100vw - 1200px) / 2)); padding-right: max(var(--gutter), calc((100vw - 1200px) / 2)); padding-bottom: 40px; }
+      .tour-head { grid-column: 1 / -1; padding: 10px 0 24px; }
+      .tour-panel { align-self: end; margin-left: 40px; padding: 28px; }
+      .tcaps { height: 150px; }
+      .tcap h3 { font-size: 34px; }
+      .tcap p { font-size: 16px; }
+      .data .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 60px; }
+      .order .wrap { grid-template-columns: 1fr 1fr; align-items: center; }
+      .order-cal { order: 2; }
+    }
+    @media (prefers-reduced-motion: reduce) { .cue i::after, .cue::after, .scroll-hint svg { animation: none; } }
+  </style>
+</head>
+<body>
+  <nav class="review" aria-label="Design options">
+    <a href="index.html">Design 1<small>Paper</small></a>
+    <a href="design-2.html">Design 2<small>Noir</small></a>
+    <a href="design-3.html" aria-current="page">Design 3<small>Studio</small></a>
+  </nav>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="#top">Desk Calendar 2027</a>
+      <a class="nav-order" href="#order">Order <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="hero" aria-label="Introduction">
+      <div class="pin" id="heroPin">
+        <div class="hero-title" id="heroTitle">
+          <p class="mono">Nº 2027 · Desk calendar</p>
+          <h1>Desk<br>Calendar<br>2027</h1>
+          <p class="sub">Photographed and designed by me. Made for friends, and friends of friends.</p>
+        </div>
+        <div class="hero-cal" id="heroCalWrap"><div id="heroCal" role="img" aria-label="The desk calendar, pulled apart into its cover, January photo, January planner and stand, then put back together"></div></div>
+        <div id="dots"></div>
+        <div class="legend" id="legend">
+          <div><b>1</b><span>Cover<em>The year</em></span></div>
+          <div><b>2</b><span>Photograph<em>One each month</em></span></div>
+          <div><b>3</b><span>Planner page<em>One each month</em></span></div>
+          <div><b>4</b><span>Wire-bound stand<em>Feb to Dec behind</em></span></div>
+        </div>
+        <p class="fig mono" id="figA">Fig. 1 <b>Exploded view</b></p>
+        <p class="fig mono" id="figB">Fig. 2 <b>January</b></p>
+        <p class="scroll-hint mono" id="hint">Scroll <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></p>
+      </div>
+    </section>
+
+    <section class="figures" aria-label="In figures">
+      <div class="wrap">
+        <div class="grid">
+          <div data-reveal><p class="mono">01</p><p class="big">12</p><p>Photographs, one opening each month</p></div>
+          <div data-reveal style="--d:.06s"><p class="mono">02</p><p class="big">12</p><p>Planner pages, one behind each photograph</p></div>
+          <div data-reveal style="--d:.12s"><p class="mono">03</p><p class="big" id="placeCount">8</p><p>Places, from Kuala Lumpur to Prague</p></div>
+          <div data-reveal style="--d:.18s"><p class="mono">04</p><p class="big"><small>RM</small>49</p><p>Free delivery in Malaysia and Singapore</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tour" id="planner" aria-label="The planner page">
+      <div class="pin">
+        <div class="tour-head"><h2>Planner<br>page</h2><p class="mono" id="tourNum">01 / 06</p></div>
+        <div class="tour-view" id="tourView"><div class="tour-frame" id="tourFrame"><img src="assets/planner-jan.webp" width="2000" height="2586" alt="The January 2027 planner page"></div></div>
+        <div class="tour-panel">
+          <div class="segs" id="segs"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+          <div class="tcaps">
+            <div class="tcap"><h3>One page, one month</h3><p>The planner page sits behind the photograph, so neither has to share space.</p></div>
+            <div class="tcap"><h3>Room to write</h3><p>Big date squares. Weeks start on Sunday.</p></div>
+            <div class="tcap"><h3>Holidays marked</h3><p>Printed on the day, like New Year's Day and Thaipusam.</p></div>
+            <div class="tcap"><h3>Months either side</h3><p>December and February, for plans that cross a month end.</p></div>
+            <div class="tcap"><h3>Week numbers</h3><p>Down the side of every row.</p></div>
+            <div class="tcap"><h3>To-do and notes</h3><p>At the foot of every month.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="months" aria-label="The twelve photographs">
+      <div class="wrap">
+        <div class="months-head" data-reveal><p class="mono">Photographs</p><h2>Twelve<br>months</h2></div>
+        <div class="stack" id="stack"></div>
+      </div>
+    </section>
+
+    <section class="data" aria-label="Details">
+      <div class="wrap">
+        <div data-reveal><p class="mono">Details</p><h2>Technical<br>data</h2></div>
+        <dl class="table" data-reveal>
+          <div><dt>Format</dt><dd>Desk calendar on a fold-out stand</dd></div>
+          <div><dt>Binding</dt><dd>Wire bound along the top</dd></div>
+          <div><dt>Contents</dt><dd>Cover + 12 months; each month is a photograph, then a planner page</dd></div>
+          <div><dt>Planner</dt><dd>Sunday start · holidays marked · week numbers · months either side · to-do · notes</dd></div>
+          <div><dt>Photographs</dt><dd id="specPhotos">12, my own</dd></div>
+          <div><dt>Delivery</dt><dd>Free in Malaysia and Singapore</dd></div>
+          <div><dt>Price</dt><dd>RM 49</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="order" id="order" aria-label="Order">
+      <div class="wrap">
+        <div class="order-cal" id="orderCalScene"><div id="orderCal" role="img" aria-label="The desk calendar on its stand"></div></div>
+        <div style="display:grid; gap:18px">
+          <p class="mono" data-reveal>Order</p>
+          <h2 data-reveal>Yours for<br>2027</h2>
+          <p class="price" data-reveal><small>RM</small>49</p>
+          <p class="ship" data-reveal>Free delivery anywhere in Malaysia and Singapore. Orders go through a short Google Form.</p>
+          <a class="btn" href="#order" data-order="final" data-reveal>Order a calendar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap mono"><span>Desk Calendar 2027</span><span>A personal project</span></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/content.js"></script>
+  <script src="assets/js/motion.js"></script>
+  <script>
+  (function () {
+    const { scene, onFrame, onMeasure, seg, lerp, ease, clamp, Calendar3D, PlannerTour } = Motion;
+    const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+    const toast = $("#toast"); let tt;
+    wireOrderLinks(m => { toast.textContent = m; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2400); });
+    const nav = $("#nav");
+    addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 60), { passive: true });
+
+    /* ------------------------------------------------------------ hero: front view, pulled apart, put back, turned to January */
+    const calEl = $("#heroCal");
+    const cal = Calendar3D(calEl, { sheets: CAL.SHEETS, stand: "white" });
+    const title = $("#heroTitle"), wrap = $("#heroCalWrap"), pin = $("#heroPin");
+    const legend = $$("#legend > div"), figA = $("#figA"), figB = $("#figB"), hint = $("#hint");
+    let H = innerHeight, W = 240;
+    // the exploded pose: camera left of and above the calendar, sheets fanned toward it
+    const EX = { ry: -36, rx: -12 }, GAP = .36, LIFT = .18;
+    function pose(p) {
+      const into = ease.inOut(seg(p, .1, .3)), out = ease.inOut(seg(p, .52, .68)), x = into * (1 - out);
+      return {
+        y: lerp(H * .245, H * -.03, ease.inOut(seg(p, 0, .16))) + x * H * .05,
+        s: lerp(.76, .92, ease.inOut(seg(p, 0, .16))) - x * .14 + seg(p, .68, .8) * .12,
+        ry: lerp(-8, EX.ry, into) * (1 - out) + out * lerp(0, -4, seg(p, .8, 1)),
+        rx: lerp(-8, EX.rx, x),
+        px: x * .3,
+        ex: x
+      };
+    }
+    function apply(q) {
+      wrap.style.transform = `translate3d(0, ${q.y.toFixed(1)}px, 0) scale(${q.s.toFixed(4)})`;
+      cal.view({ ry: q.ry, rx: q.rx, x: W * q.px });
+      cal.explode(q.ex, W * GAP, W * LIFT);
+    }
+    // where each layer's corner lands in the exploded pose, measured once per layout so nothing is read while scrolling
+    const dotsBox = $("#dots");
+    dotsBox.innerHTML = [1, 2, 3, 4].map(n => `<span class="dot">${n}</span>`).join("");
+    const dots = $$("#dots .dot");
+    let anchors = [];
+    onMeasure(vh => {
+      H = vh; W = calEl.querySelector(".c3-sheet").offsetWidth;
+      apply(pose(.42));
+      const pr = pin.getBoundingClientRect();
+      const faces = [0, 1, 2].map(i => cal.sheets[i].querySelector(".c3-face").getBoundingClientRect());
+      const board = calEl.querySelector(".c3-front > .c3-plane").getBoundingClientRect();
+      anchors = [...faces, board].map((r, i) => [r.right - pr.left - (i === 3 ? 18 : 16), r.top - pr.top + (i === 3 ? 26 : 16)]);
+    });
+    scene($("#hero"), p => {
+      const t = ease.inOut(seg(p, 0, .12));
+      title.style.opacity = (1 - seg(p, .02, .11)).toFixed(3);
+      title.style.transform = `translate3d(0, ${(-40 * t).toFixed(1)}px, 0)`;
+      hint.style.opacity = (1 - seg(p, 0, .04)).toFixed(3);
+      apply(pose(p));
+      const show = seg(p, .26, .34) * (1 - seg(p, .52, .58));
+      dots.forEach((d, i) => {
+        const o = clamp(show * 1.6 - i * .2);
+        d.style.opacity = o.toFixed(3);
+        d.style.transform = `translate3d(${anchors[i] ? anchors[i][0].toFixed(1) : 0}px, ${anchors[i] ? anchors[i][1].toFixed(1) : 0}px, 0) scale(${(.6 + .4 * o).toFixed(3)})`;
+      });
+      legend.forEach((l, i) => {
+        const o = clamp(show * 1.6 - i * .2);
+        l.style.opacity = o.toFixed(3);
+        l.style.transform = `translate3d(0, ${((1 - o) * 10).toFixed(1)}px, 0)`;
+      });
+      figA.style.opacity = (show * .999).toFixed(3);
+      cal.flip(0, ease.inOut(seg(p, .74, .94)));
+      figB.style.opacity = seg(p, .9, .96).toFixed(3);
+    });
+
+    /* ------------------------------------------------------------ figures */
+    const places = [...new Set(CAL.PAGES.map(p => p.place).filter(p => !/across/i.test(p)))];
+    $("#placeCount").textContent = places.length;
+    $("#specPhotos").textContent = `12, my own, from ${places.join(", ")}`;
+
+    /* ------------------------------------------------------------ planner tour */
+    const STEPS = [[0, 0, 700, 905], [40, 172, 420, 250], [466, 205, 206, 96], [332, 36, 342, 112], [22, 182, 150, 200], [44, 724, 384, 136]];
+    const tour = PlannerTour({ view: $("#tourView"), frame: $("#tourFrame"), steps: STEPS, maxScale: matchMedia("(min-width: 900px)").matches ? 2.6 : 3.4 });
+    const caps = $$(".tcap"), segs = $$("#segs b"), tourNum = $("#tourNum");
+    let shown = -1;
+    scene($("#planner"), p => {
+      const at = tour.update(seg(p, .02, .96));
+      caps.forEach((c, k) => {
+        const o = clamp(1 - Math.abs(at - k) * 2.6);
+        c.style.opacity = o.toFixed(3);
+        c.style.transform = `translate3d(0, ${((at - k) * -14).toFixed(1)}px, 0)`;
+      });
+      segs.forEach((s, k) => { s.style.transform = `scaleX(${clamp(at - k + 1).toFixed(3)})`; });
+      const k = Math.round(at);
+      if (k !== shown) { shown = k; tourNum.textContent = `${String(k + 1).padStart(2, "0")} / 06`; }
+    });
+    addEventListener("resize", () => tour.layout());
+
+    /* ------------------------------------------------------------ months: each sheet settles, then is covered by the next */
+    const stack = $("#stack");
+    stack.innerHTML = CAL.PAGES.map((pg, i) => `
+      <article class="sheet" style="--i:${i}">
+        <div class="row"><b>${CAL.MONTHS[i]}</b><span class="mono">${String(i + 1).padStart(2, "0")} / 12</span></div>
+        <img src="${pg.file}" width="800" height="1035" alt="${pg.title}, ${pg.place}" loading="lazy" decoding="async">
+        <div class="cap"><span>${pg.title}</span><span>${pg.place}</span></div>
+        <span class="dim"></span>
+      </article>`).join("");
+    const sheets = $$(".sheet"), dims = sheets.map(s => s.querySelector(".dim"));
+    let marks = [];
+    onMeasure(() => {
+      // flow positions, read with the sticky offset removed
+      marks = sheets.map(s => { const prev = s.style.position; s.style.position = "relative"; const y = s.getBoundingClientRect().top + scrollY; s.style.position = prev; return { y, h: s.offsetHeight, top: parseFloat(getComputedStyle(s).top) }; });
+    });
+    const lastQ = [];
+    onFrame(y => {
+      for (let i = 0; i < sheets.length - 1; i++) {
+        const a = marks[i], b = marks[i + 1];
+        if (!a || !b) continue;
+        // how far the next sheet has slid over this one
+        const q = clamp((y + a.top + a.h - b.y) / a.h);
+        if (q === lastQ[i]) continue;
+        lastQ[i] = q;
+        sheets[i].style.transform = q > 0 ? `scale(${(1 - q * .06).toFixed(4)})` : "";
+        dims[i].style.opacity = (q * .28).toFixed(3);
+      }
+    });
+
+    /* ------------------------------------------------------------ order */
+    const cal2 = Calendar3D($("#orderCal"), { sheets: [CAL.SHEETS[0]], stand: "white", blanks: 4 });
+    scene($("#orderCalScene"), p => { cal2.view({ ry: lerp(26, -24, p), rx: -9 }); cal2.ground(1, .9); }, "view");
+
+    Motion.ready(document.querySelectorAll(".hero img, .tour img")).then(Motion.measure);
+    Motion.reveals();
+  })();
+  </script>
+</body>
+</html>
