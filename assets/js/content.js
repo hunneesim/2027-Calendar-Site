@@ -1,14 +1,13 @@
 /* Content shared by all the designs.
    ORDER_URL: paste the Google Form link here once it exists. Every "Order" button on every design uses it.
-   PRICE, DELIVERY: shown wherever the site states the price and delivery. Change them here once
-          Singapore pricing is decided.
+   PRICE, DELIVERY: shown wherever Designs 3 and 4 state the price and delivery.
    PAGES: the twelve photo pages in month order. To swap one, change its files and its text.
           tone is the photograph's main colour, used to tint the background behind it.
           place is left out of the "places" count when mixed is true. */
 window.CAL = {
   ORDER_URL: "",
   PRICE: "RM 49",
-  DELIVERY: "Delivered free in Malaysia and Singapore",
+  DELIVERY: "Delivered free anywhere in Malaysia. Singapore: postage at cost.",
   SOON: "Orders open soon. I'll post on Instagram when they do.",
   PAGES: [
     { file: "assets/pages/p02.jpg", webp: "assets/pages/p02.webp", tone: "#479bbf", title: "Jade Dragon Snow Mountain", place: "Lijiang",

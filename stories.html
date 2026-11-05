@@ -157,12 +157,12 @@
     ctx.drawImage(img, -w / 2, -h / 2, w, h); ctx.restore();
   }
   function priceBlock(ctx, cy) {
-    // "RM 49 | Free delivery / Malaysia & Singapore", centred as one group
+    // "RM 49 | Free delivery / anywhere in Malaysia", centred as one group
     ctx.textBaseline = "alphabetic";
     ctx.font = `600 34px ${SANS}`; const rmW = ctx.measureText("RM").width;
     ctx.font = `600 124px ${SANS}`; const nW = ctx.measureText("49").width;
     ctx.font = `600 34px ${SANS}`; const a = ctx.measureText("Free delivery").width;
-    ctx.font = `400 30px ${SANS}`; const b = ctx.measureText("Malaysia & Singapore").width;
+    ctx.font = `400 30px ${SANS}`; const b = ctx.measureText("anywhere in Malaysia").width;
     const left = rmW + 10 + nW, gap = 44, right = Math.max(a, b), total = left + gap * 2 + right;
     let x = W / 2 - total / 2;
     ctx.fillStyle = C.ink; ctx.font = `600 34px ${SANS}`; ctx.fillText("RM", x, cy - 22);
@@ -170,7 +170,7 @@
     line(ctx, x + left + gap, cy - 62, x + left + gap, cy + 34, C.line, 2);
     const rx = x + left + gap * 2;
     ctx.fillStyle = C.ink; ctx.font = `600 34px ${SANS}`; ctx.fillText("Free delivery", rx, cy - 14);
-    ctx.fillStyle = C.ink2; ctx.font = `400 30px ${SANS}`; ctx.fillText("Malaysia & Singapore", rx, cy + 30);
+    ctx.fillStyle = C.ink2; ctx.font = `400 30px ${SANS}`; ctx.fillText("anywhere in Malaysia", rx, cy + 30);
   }
   function linkHint(ctx, y) {
     ctx.fillStyle = C.brass; ctx.font = `600 26px ${SANS}`; ctx.textBaseline = "alphabetic";
