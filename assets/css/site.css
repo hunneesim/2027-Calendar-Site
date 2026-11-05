@@ -160,6 +160,15 @@ h3, .h3 { font-weight: 500; font-size: 20px; line-height: 1.2; letter-spacing: -
 .btn:active, .reveal .btn.in:active { transform: scale(.975); transition-duration: .08s; }
 .btn:focus-visible { outline-color: var(--ink); }
 @media (hover: hover) { .btn:hover svg { transform: translateX(4px); } }
+.options { display: grid; gap: 12px; margin-top: 4px; }
+.opt { display: grid; gap: 6px; align-content: start; padding: 16px 18px 18px; border: 1px solid var(--line); background: var(--paper); }
+.opt-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.opt-top b { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.opt-top span { font-size: 24px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
+.opt p:last-child { font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.deal { font-size: 15px; font-weight: 500; }
+.ship { font-size: 14px; line-height: 1.5; color: var(--ink-2); max-width: 30em; }
+@media (min-width: 560px) { .options { grid-template-columns: 1fr 1fr; } }
 .order-note { font-size: 14px; color: var(--ink-2); }
 .order-note:empty { margin-top: -16px; }
 .steps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; counter-reset: s; font-size: 14px; color: var(--ink-2); max-width: 30em; }

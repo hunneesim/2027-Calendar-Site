@@ -52,7 +52,7 @@
   <div class="wrap">
     <header>
       <p class="label">Desk Calendar 2027 · Instagram</p>
-      <h1>Six graphics, two sizes</h1>
+      <h1>Seven graphics, two sizes</h1>
       <p>Stories are 1080 × 1920. Posts are 1080 × 1350, the tallest a feed post can be. Post them in this order: as a carousel in the feed, or one after another in your story.</p>
     </header>
     <div class="switch" role="group" aria-label="Size">
@@ -67,7 +67,7 @@
     </div>
   </div>
   <div class="bar"><div class="in">
-    <button class="btn" id="saveAll" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span id="saveAllText">Save all 6 stories</span></button>
+    <button class="btn" id="saveAll" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span id="saveAllText">Save all 7 stories</span></button>
   </div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -77,7 +77,7 @@
   // where each layer of the exploded render sits, as fractions of the image
   const IMGS_ANCHORS = [[0.5405, 0.0209], [0.6629, 0.1294], [0.7772, 0.2311], [0.7975, 0.9694]];
 
-  const PRICE = "RM 49", FREE = "Free delivery", WHERE = "within Malaysia";
+  const FREE = "Free delivery", WHERE = "within Malaysia";
   const C = { paper: "#f4f1ea", sheet: "#faf8f4", ink: "#1a1814", ink2: "#45403a", muted: "#6a645a", bronze: "#76592f", line: "#dcd5c8" };
   const SANS = '"Inter Tight", "Helvetica Neue", Arial, sans-serif', SERIF = '"Cormorant Garamond", Georgia, serif';
   const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -137,18 +137,19 @@
     ctx.fillStyle = C.ink; ctx.font = `600 ${Math.round(r * 1.05)}px ${SANS}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(n), cx, cy + 1);
     ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   }
-  // "RM 49 | Free delivery / within Malaysia", centred as one group
+  // "from RM 39 | Free delivery / within Malaysia", centred as one group
   function priceBlock(ctx, cy, big = 124) {
     ctx.textBaseline = "alphabetic";
     const s = big / 124;
     ctx.font = `600 ${34 * s}px ${SANS}`; const rmW = ctx.measureText("RM").width;
-    ctx.font = `600 ${big}px ${SANS}`; const nW = ctx.measureText("49").width;
+    ctx.font = `600 ${big}px ${SANS}`; const nW = ctx.measureText("39").width;
     ctx.font = `600 ${34 * s}px ${SANS}`; const a = ctx.measureText(FREE).width;
     ctx.font = `400 ${30 * s}px ${SANS}`; const b = ctx.measureText(WHERE).width;
     const left = rmW + 10 * s + nW, gap = 44 * s, total = left + gap * 2 + Math.max(a, b);
     const x = W / 2 - total / 2;
+    ctx.fillStyle = C.muted; ctx.font = `500 ${22 * s}px ${SANS}`; spaced(ctx, "FROM", x, cy - 60 * s, .14);
     ctx.fillStyle = C.ink; ctx.font = `600 ${34 * s}px ${SANS}`; ctx.fillText("RM", x, cy - 22 * s);
-    ctx.font = `600 ${big}px ${SANS}`; ctx.fillText("49", x + rmW + 10 * s, cy + 40 * s);
+    ctx.font = `600 ${big}px ${SANS}`; ctx.fillText("39", x + rmW + 10 * s, cy + 40 * s);
     line(ctx, x + left + gap, cy - 62 * s, x + left + gap, cy + 34 * s, C.line, 2);
     const rx = x + left + gap * 2;
     ctx.fillStyle = C.ink; ctx.font = `600 ${34 * s}px ${SANS}`; ctx.fillText(FREE, rx, cy - 14 * s);
@@ -213,7 +214,7 @@
     page(ctx, img.planner, px, py, pw, 50, 24, .3);
     const marks = [[186, 254], [522, 279], [302, 96], [14, 268], [300, 792]];
     marks.forEach(([mx, my], i) => numberMark(ctx, i + 1, px + mx * s, py + my * s, f.story ? 19 : 17));
-    const items = [["Room to write", "Big date squares"], ["Holidays marked", "Malaysian, on the day"], ["Months either side", "At a glance"], ["Week numbers", "Down the side"], ["To-do and notes", "Every month"]];
+    const items = [["Room to write", "Big date squares"], ["Holidays marked", "Malaysia, Singapore or UK"], ["Months either side", "At a glance"], ["Week numbers", "Down the side"], ["To-do and notes", "Every month"]];
     const lx = px + pw + 52, step = f.story ? 128 : 116, ly0 = py + (f.story ? 36 : 30);
     items.forEach(([t, sub], i) => {
       const y = ly0 + i * step;
@@ -280,20 +281,20 @@
     headline(ctx, "Desk Calendar 2027", "", 80, top + hs + 12, hs);
     standing(ctx, img.front, W - 80 - (f.story ? 150 : 120), f.story ? 760 : 520, f.story ? 300 : 240);
     const rows = [
-      ["Size", "A5 pages, 148 × 210 mm"],
-      ["With binding", "148 × 220 mm, on a stand"],
-      ["Inside", "12 photographs, 12 planner pages"],
-      ["Printed", "On both sides"],
-      ["Price", PRICE],
+      ["Size", "A5, wire-bound, on a stand"],
+      ["Standard", "RM 39 · Malaysia, Singapore or UK holidays"],
+      ["Personalised", "RM 49 · Mix holidays + 10 of your dates"],
+      ["Two copies", "RM 10 off the pair, mix and match"],
+      ["Order by", "30 November · Delivered in December"],
       ["Delivery", "Free within Malaysia"],
       ["Elsewhere", "Message me about postage"]
     ];
-    const y0 = f.story ? 840 : 590, step = f.story ? 84 : 60, fs = f.story ? 30 : 27;
+    const y0 = f.story ? 840 : 590, step = f.story ? 84 : 60, fs = f.story ? 29 : 25;
     line(ctx, 80, y0 - (f.story ? 56 : 46), W - 80, y0 - (f.story ? 56 : 46), C.ink, 2);
     rows.forEach(([k, v], i) => {
       const y = y0 + i * step;
       label(ctx, k, 80, y, "left", f.story ? 20 : 18, C.muted);
-      ctx.fillStyle = C.ink; ctx.font = `500 ${fs}px ${SANS}`; ctx.fillText(v, 360, y);
+      ctx.fillStyle = C.ink; ctx.font = `500 ${fs}px ${SANS}`; ctx.fillText(v, f.story ? 340 : 320, y);
       line(ctx, 80, y + step * .42, W - 80, y + step * .42, C.line, 2);
     });
     const hy = y0 + rows.length * step + (f.story ? 40 : 26);
@@ -307,6 +308,38 @@
     cta(ctx, f, f.story ? 1712 : 1270);
   }
 
+  /* ------------------------------------------------------------ 7 · make it yours */
+  // the planner image is 1000 px across for the page's 700 units; this crops Wednesday to Saturday, weeks 1 to 3
+  function gYours(ctx, img, f) {
+    const H = f.H; paper(ctx, H, H * .4);
+    const top = f.story ? 280 : 140, hs = f.story ? 78 : 64;
+    label(ctx, "Personalised · RM 49", 80, top);
+    headline(ctx, "Make it yours.", "Your holidays, your dates.", 80, top + hs + 16, hs);
+    const k = img.planner.width / 700, sx = 315.4, sy = 180, sw = 345, sh = 283;
+    const dw = f.story ? 920 : 760, u = dw / sw, dh = sh * u, dx = (W - dw) / 2, dy = f.story ? 500 : 330;
+    ctx.save(); ctx.shadowColor = "rgba(26,24,20,.26)"; ctx.shadowBlur = 40; ctx.shadowOffsetY = 16; ctx.fillStyle = "#faf8f4"; ctx.fillRect(dx, dy, dw, dh); ctx.restore();
+    ctx.drawImage(img.planner, sx * k, sy * k, sw * k, sh * k, dx, dy, dw, dh);
+    // your own dates: a heart and a label in their own colour, under the date (an illustration; the real colour is set in the print file)
+    const OWN = "#2b6f7a", cw = 603 / 7;
+    const mark = (date, text) => {
+      const i = date + 4, cx = 57 + (i % 7) * cw, cy = 213 + Math.floor(i / 7) * 83.2;
+      const x = dx + (cx - sx + 9) * u, y = dy + (cy - sy + 50) * u;
+      ctx.fillStyle = OWN; ctx.font = `600 ${f.story ? 19 : 16}px ${SANS}`; ctx.textBaseline = "middle";
+      const hx = x + 6 * u / 2.67, r = (f.story ? 6 : 5);
+      ctx.beginPath(); ctx.moveTo(hx, y + r * 1.1); ctx.bezierCurveTo(hx - r * 2, y - r * .2, hx - r * .9, y - r * 1.6, hx, y - r * .5); ctx.bezierCurveTo(hx + r * .9, y - r * 1.6, hx + r * 2, y - r * .2, hx, y + r * 1.1); ctx.fill();
+      spaced(ctx, text.toUpperCase(), hx + r * 2, y + 1, .06);
+      ctx.textBaseline = "alphabetic";
+    };
+    mark(7, "Mum's birthday"); mark(14, "Anniversary"); mark(16, "Mochi, 3");
+    const ly = dy + dh + (f.story ? 80 : 56), fs = f.story ? 30 : 26, gap = f.story ? 56 : 46;
+    [["Holidays", "Mix and match: any Malaysian states, Singapore, the UK"], ["Your dates", "Up to 10: birthdays, anniversaries, your pet's"]].forEach(([a, b], i) => {
+      const y = ly + i * gap;
+      label(ctx, a, 80, y, "left", f.story ? 20 : 18, i ? OWN : C.bronze);
+      ctx.fillStyle = C.ink2; ctx.font = `400 ${fs}px ${SANS}`; ctx.fillText(b, f.story ? 290 : 270, y);
+    });
+    footer(ctx, f);
+  }
+
   /* ------------------------------------------------------------ the page */
   const ITEMS = [
     ["cover", "1 · The cover", "The calendar, the name, the price", gCover],
@@ -314,7 +347,8 @@
     ["inside", "3 · What's inside", "The planner page, feature by feature", gPlanner],
     ["twelve", "4 · Twelve months", "All twelve photo pages", gTwelve],
     ["apart", "5 · Taken apart", "The exploded view", gApart],
-    ["details", "6 · Details", "Size, price, delivery, how to order", gDetails]
+    ["details", "6 · Details", "Prices, options, dates, how to order", gDetails],
+    ["yours", "7 · Make it yours", "Personalised holidays and your own dates", gYours]
   ];
   const FORMATS = { story: { story: true, H: 1920, ar: "9 / 16", name: "story", plural: "stories" }, post: { story: false, H: 1350, ar: "4 / 5", name: "post", plural: "posts" } };
   let fmt = FORMATS.story, img = null, drawn = {};
@@ -334,7 +368,7 @@
       ITEMS[i][3](ctx, img, fmt);
       const wait = frames[i].querySelector(".wait"); if (wait) wait.remove();
     });
-    document.getElementById("saveAllText").textContent = `Save all 6 ${fmt.plural}`;
+    document.getElementById("saveAllText").textContent = `Save all ${ITEMS.length} ${fmt.plural}`;
   }
   const name = i => `calendar-2027-${fmt.name}-${i + 1}-${ITEMS[i][0]}.png`;
 

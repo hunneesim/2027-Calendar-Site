@@ -1,12 +1,18 @@
 /* Content shared by all the designs.
    ORDER_URL: paste the Google Form link here once it exists. Every "Order" button on every design uses it.
-   PRICE, DELIVERY: shown wherever Designs 3 and 4 state the price and delivery.
+   PRICE, OPTIONS, DEAL, WHEN, DELIVERY: shown wherever Designs 3 and 4 state prices, dates and delivery.
    PAGES: the twelve photo pages in month order. To swap one, change its files and its text.
           tone is the photograph's main colour, used to tint the background behind it.
           place is left out of the "places" count when mixed is true. */
 window.CAL = {
   ORDER_URL: "",
-  PRICE: "RM 49",
+  PRICE: "RM 39",                                   // the starting price, as in "from RM 39"
+  OPTIONS: [
+    { name: "Standard", price: "RM 39", text: "Holidays for Malaysia, Singapore or the UK. Pick one." },
+    { name: "Personalised", price: "RM 49", text: "Mix any holidays: Malaysian states, Singapore, the UK. Plus up to 10 of your own dates, like birthdays, anniversaries or your pet's birthday." }
+  ],
+  DEAL: "Two copies? RM 10 off the pair. Mix and match.",
+  WHEN: "Order by 30 November, delivered in December.",
   DELIVERY: "Free delivery within Malaysia. Outside Malaysia? Message me about postage.",
   SOON: "Orders open soon. I'll post on Instagram when they do.",
   PAGES: [

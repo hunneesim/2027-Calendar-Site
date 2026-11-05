@@ -14,6 +14,12 @@
   function fill() {
     $$("[data-fill=price]").forEach(e => { e.textContent = nb(CAL.PRICE); });
     $$("[data-fill=delivery]").forEach(e => { e.textContent = CAL.DELIVERY; });
+    $$("[data-fill=deal]").forEach(e => { e.textContent = CAL.DEAL; });
+    $$("[data-fill=when]").forEach(e => { e.textContent = CAL.WHEN; });
+    $$("[data-fill=prices]").forEach(e => { e.textContent = CAL.OPTIONS.map(o => `${nb(o.price)} ${o.name.toLowerCase()}`).join(" · ") + " · RM\u00a010 off two copies"; });
+    $$("[data-fill=options]").forEach(e => {
+      e.innerHTML = CAL.OPTIONS.map(o => `<div class="opt"><p class="opt-top"><b>${o.name}</b><span>${nb(o.price)}</span></p><p>${o.text}</p></div>`).join("");
+    });
     $$("[data-fill=places]").forEach(e => { e.textContent = `12, all mine, taken in ${listOf(CAL.places())}`; });
     $$("[data-fill=count]").forEach(e => { e.textContent = CAL.places().length; });
   }
