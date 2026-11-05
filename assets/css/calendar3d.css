@@ -2,7 +2,7 @@
    Size is set by --w (the width of one sheet). Everything else is derived from it. */
 .c3 {
   --w: 280px;
-  --hs: calc(var(--w) * 1.2941);            /* sheet height: the pages are 1632 x 2112 */
+  --hs: calc(var(--w) * 1.4189);            /* sheet height: A5, 148 x 210 mm */
   --bw: calc(var(--w) * 1.07);              /* stand board width */
   --bh: calc(var(--hs) + var(--w) * .11);   /* stand board height, a lip shows below the sheets */
   --lean-f: 13deg;
@@ -39,7 +39,7 @@
 .c3-back > .c3-plane { background: linear-gradient(180deg, var(--back), color-mix(in srgb, var(--back) 80%, #000)); }
 
 .c3-sheet {
-  position: absolute; left: calc((var(--bw) - var(--w)) / 2); top: calc(var(--w) * .022);
+  position: absolute; left: calc((var(--bw) - var(--w)) / 2); top: 0;   /* hinged exactly at the binding */
   width: var(--w); height: var(--hs);
   transform-origin: 50% 0;
   will-change: transform;
@@ -50,8 +50,9 @@
   -webkit-backface-visibility: hidden; backface-visibility: hidden;
   box-shadow: 0 0 0 .5px rgba(0,0,0,.06);
 }
-.c3-face img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.c3-rear { transform: rotateX(180deg); background: var(--paper-back); }
+.c3-face img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* the back is turned about the vertical axis, so artwork on it reads upright once the sheet has gone over the top */
+.c3-rear { transform: rotateY(180deg); background: var(--paper-back); }
 .c3-blank .c3-face { background: #fbfaf7; }
 
 /* punched holes along the top of each sheet, lined up with the rings */

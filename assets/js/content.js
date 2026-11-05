@@ -24,6 +24,14 @@ window.CAL = {
     { src: "assets/cover.jpg", alt: "Cover: the numerals 2027 filled with the steel roof of King's Cross" },
     { src: "assets/pages/p02.jpg", alt: "January photo page: Jade Dragon Snow Mountain at sunrise" },
     { src: "assets/planner-jan-800.webp", alt: "January planner page" }
+  ],
+  // the same calendar printed on both sides of each sheet (used by Design 3): the planner faces you,
+  // and the month's photograph is on the back of the sheet before it, facing the other side of the desk
+  DUPLEX: [
+    { src: "assets/cover.jpg", bg: "#fff", alt: "Cover: the numerals 2027 filled with the steel roof of King's Cross",
+      back: { src: "assets/pages/p02.jpg", bg: "#fff", alt: "January photo page: Jade Dragon Snow Mountain at sunrise" } },
+    { src: "assets/planner-jan-800.webp", bg: "#faf8f4", alt: "January planner page",
+      back: { src: "assets/pages/p03.jpg", bg: "#fff", alt: "February photo page" } }
   ]
 };
 

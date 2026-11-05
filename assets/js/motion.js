@@ -80,10 +80,12 @@
   function Calendar3D(root, { sheets, stand = "light", rings = 17, blanks = 3 }) {
     root.classList.add("c3", "c3--" + stand);
     const holes = "<i></i>".repeat(rings);
+    // a sheet can be printed on both sides: { src, bg, back: { src, bg } }
+    const art = p => p ? `<img src="${p.src}" alt="${p.alt || ""}" decoding="async" draggable="false">` : "";
     const sheetHTML = (s, i) =>
       `<div class="c3-sheet${s ? "" : " c3-blank"}" data-i="${i}">` +
-        `<div class="c3-face">${s ? `<img src="${s.src}" alt="${s.alt || ""}" decoding="async" draggable="false">` : ""}<b class="c3-holes">${holes}</b><span class="c3-shade"></span></div>` +
-        `<div class="c3-face c3-rear"><b class="c3-holes">${holes}</b></div>` +
+        `<div class="c3-face"${s && s.bg ? ` style="background:${s.bg}"` : ""}>${art(s)}<b class="c3-holes">${holes}</b><span class="c3-shade"></span></div>` +
+        `<div class="c3-face c3-rear"${s && s.back && s.back.bg ? ` style="background:${s.back.bg}"` : ""}>${art(s && s.back)}<b class="c3-holes">${holes}</b></div>` +
       `</div>`;
     const all = [...sheets, ...Array(blanks).fill(null)];
     root.innerHTML =
@@ -99,9 +101,14 @@
     const state = els.map(() => ({ a: 0, z: 0, y: 0 }));
     const zOf = i => (n - i) * 0.9;
 
+    // The stacking offset is applied along the sheet's own face, after the turn: in front of the stack while the
+    // sheet lies on the front, and behind it (so outside the back board) once it has gone over the top.
+    // Sheets turned earlier lie closer to the board.
+    const FLIP = 360 - 13 - 21;
     function write(i) {
-      const s = state[i];
-      els[i].style.transform = `translate3d(0, ${s.y}px, ${zOf(i) + s.z}px) rotateX(${s.a}deg)`;
+      const s = state[i], t = s.a / FLIP;
+      const local = lerp(zOf(i), -(2 + i * 0.9), ease.smooth(clamp((t - .35) / .3)));
+      els[i].style.transform = `translate3d(0, ${s.y}px, ${s.z}px) rotateX(${s.a}deg) translateZ(${local.toFixed(2)}px)`;
     }
     els.forEach((_, i) => write(i));
 
@@ -119,7 +126,7 @@
       // t: 0 = lying on the front, 1 = flipped over the top onto the back
       flip(i, t) {
         if (!els[i]) return;
-        const a = t * (360 - 13 - 21);
+        const a = t * FLIP;
         state[i].a = a; write(i);
         // the sheet darkens as it turns away from the light, and the one underneath is shaded while it is covered
         shades[i].style.opacity = a < 180 ? (Math.sin(a * Math.PI / 180) * 0.45).toFixed(3) : 0;
