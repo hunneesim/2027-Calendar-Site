@@ -313,7 +313,7 @@
         <div class="print"><img src="${pg.file}" width="800" height="1035" alt="${pg.title}, ${pg.place}" decoding="async"></div>
         <figcaption class="meta"><span class="mo">${String(i + 1).padStart(2, "0")} · ${CAL.MONTHS[i]}</span><span class="tt">${pg.title}</span><span class="pl">${pg.place}</span></figcaption>
       </figure>`).join("");
-    const places = [...new Set(CAL.PAGES.map(p => p.place).filter(p => !/across/i.test(p)))];
+    const places = CAL.places();
     $("#specPhotos").textContent = `12 photographs, taken in ${places.length} places: ${places.join(", ")}`;
     let travel = 0;
     function sizePhotos() {

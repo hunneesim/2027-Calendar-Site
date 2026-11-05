@@ -94,10 +94,12 @@
   // iOS only shows :active styles when the page listens for touches
   addEventListener("touchstart", () => {}, { passive: true });
 
-  /* reveal on scroll for plain content: adds .in once, then stops watching */
+  /* reveal on scroll for plain content: adds .in once, then stops watching.
+     Content is only hidden once this runs (the "reveal" class), so it stays visible if scripts fail. */
   function reveals(selector = "[data-reveal]") {
     const els = document.querySelectorAll(selector);
     if (reduced || !("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("in")); return; }
+    document.documentElement.classList.add("reveal");
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -10% 0px" });
     els.forEach(e => io.observe(e));
   }
@@ -108,15 +110,17 @@
   }
 
   /* ------------------------------------------------------------ 3D calendar */
-  function Calendar3D(root, { sheets, stand = "light", rings = 17, blanks = 3 }) {
+  // lazy: images are only fetched when load(i) is called for their sheet
+  function Calendar3D(root, { sheets, stand = "light", rings = 17, blanks = 2, lazy = false }) {
     root.classList.add("c3", "c3--" + stand);
     root.style.setProperty("--rings", rings);
     // a sheet can be printed on both sides: { src, bg, back: { src, bg } }
-    const art = p => p && p.src ? `<img src="${p.src}" alt="${p.alt || ""}" decoding="async" draggable="false">` : "";
+    const art = p => p && p.src ? `<img ${lazy ? "data-src" : "src"}="${p.src}" alt="${p.alt || ""}" decoding="async" draggable="false">` : "";
+    // blank filler sheets never turn, so they have no back face
     const sheetHTML = (s, i) =>
       `<div class="c3-sheet${s ? "" : " c3-blank"}" data-i="${i}">` +
         `<div class="c3-face"${s && s.bg ? ` style="background:${s.bg}"` : ""}>${art(s)}<b class="c3-holes"></b><span class="c3-shade"></span></div>` +
-        `<div class="c3-face c3-rear"${s && s.back && s.back.bg ? ` style="background:${s.back.bg}"` : ""}>${art(s && s.back)}<b class="c3-holes"></b></div>` +
+        (s ? `<div class="c3-face c3-rear"${s.back && s.back.bg ? ` style="background:${s.back.bg}"` : ""}>${art(s.back)}<b class="c3-holes"></b></div>` : "") +
       `</div>`;
     const all = [...sheets, ...Array(blanks).fill(null)];
     root.innerHTML =
@@ -176,15 +180,21 @@
         }
       },
       // hide sheets that cannot be seen, so the browser has fewer layers to keep
-      show(i, on) { if (els[i]) els[i].style.visibility = on ? "" : "hidden"; }
+      show(i, on) { if (els[i]) els[i].style.visibility = on ? "" : "hidden"; },
+      // fetch a lazy sheet's images
+      load(i) {
+        if (!els[i]) return;
+        els[i].querySelectorAll("img[data-src]").forEach(im => { im.src = im.dataset.src; im.removeAttribute("data-src"); });
+      },
+      at(i) { return state[i] ? state[i].a / FLIP : 0; }
     };
   }
 
   /* ------------------------------------------------------------ planner tour
      Moves a camera across the January planner page (700 x 905 units) from one feature to the next.
      Each step holds still for part of its share of the progress, then eases to the next.
-     mark: an optional outline that sits on the feature being shown. */
-  function PlannerTour({ view, frame, steps, maxScale = 3.2, fit = .9, hold = .38, mark = null }) {
+     mark: an optional outline drawn around marks[k] (page units) when the camera rests on step k. */
+  function PlannerTour({ view, frame, steps, maxScale = 3.2, fit = .9, hold = .38, mark = null, marks = steps }) {
     let vw = 1, vh2 = 1, pw = 1;
     function layout() {
       vw = view.clientWidth; vh2 = view.clientHeight;
@@ -209,15 +219,16 @@
       frame.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0) scale(${s.toFixed(4)})`;
       last = i + t;
       if (mark) {
-        const k = Math.round(last), near = clamp(1 - Math.abs(last - k) * 5);
-        if (k !== markOn) {
+        const k = Math.round(last), near = clamp(1 - Math.abs(last - k) * 5), m = marks[k];
+        if (k !== markOn && m) {
           markOn = k;
-          const [x, y, w, h] = steps[k], u = pw / 700, pad = 6;
-          mark.style.left = (x - pad) * u + "px"; mark.style.top = (y - pad) * u + "px";
-          mark.style.width = (w + pad * 2) * u + "px"; mark.style.height = (h + pad * 2) * u + "px";
-          mark.style.borderWidth = (1.4 / camera(steps[k], k === 0 || k === N - 1)[2]).toFixed(3) + "px";
+          const [x, y, w, h] = m, u = pw / 700;
+          mark.style.left = x * u + "px"; mark.style.top = y * u + "px";
+          mark.style.width = w * u + "px"; mark.style.height = h * u + "px";
         }
-        mark.style.opacity = (k === 0 ? 0 : near).toFixed(3);
+        // the outline sits inside the zoomed frame, so its line is thinned by the zoom to stay about 1.25px on screen
+        if (s > 0) mark.style.borderWidth = (1.25 / s).toFixed(3) + "px";
+        mark.style.opacity = (m ? near : 0).toFixed(3);
       }
       return last;   // position along the steps, e.g. 2.4 = between steps 2 and 3
     }

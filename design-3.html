@@ -4,228 +4,86 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Desk Calendar 2027 · by Sim</title>
-  <meta name="description" content="Twelve of my photographs, with a planner page for every month of 2027. A desk calendar, made for friends. RM 49.">
-  <meta name="theme-color" content="#f3f1ec">
+  <meta name="description" content="Twelve of my photographs, with a planner page for every month of 2027. A desk calendar, made for friends.">
+  <meta name="theme-color" content="#f6f4ef">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <!-- Link previews need full addresses. Update them if the site moves to its own domain. -->
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <!-- Link previews need full addresses. Update these if the site moves to its own domain. -->
+  <link rel="canonical" href="https://hunneesim.github.io/2027-Calendar-Site/design-3.html">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hunneesim.github.io/2027-Calendar-Site/design-3.html">
   <meta property="og:title" content="Desk Calendar 2027, by Sim">
   <meta property="og:description" content="Twelve of my photographs, with a planner page for every month. RM 49.">
   <meta property="og:image" content="https://hunneesim.github.io/2027-Calendar-Site/assets/og.jpg">
+  <meta property="og:image:alt" content="The 2027 desk calendar on its stand, its cover showing the numerals 2027 filled with the steel roof of King's Cross">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="assets/fonts/InterTight-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/cover.jpg" as="image" fetchpriority="high">
   <link rel="preload" href="assets/planner-jan-800.webp" as="image">
-  <link rel="preload" href="assets/pages/p02.webp" as="image">
   <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/calendar3d.css">
+  <link rel="stylesheet" href="assets/css/site.css">
   <style>
-    /* ------------------------------------------------------------ review tabs (remove once a design is chosen) */
-    .review { position: relative; z-index: 60; display: flex; gap: 3px; padding: calc(6px + env(safe-area-inset-top, 0px)) max(6px, env(safe-area-inset-right, 0px)) 6px max(6px, env(safe-area-inset-left, 0px)); background: #0d0d0d; font: 500 11.5px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    .review a { flex: 1; display: grid; gap: 3px; justify-items: center; padding: 8px 2px 7px; border-radius: 9px; color: #d6d6d6; text-decoration: none; -webkit-tap-highlight-color: transparent; white-space: nowrap; }
-    .review a small { font-size: 9.5px; color: #8d8d8d; }
-    .review a[aria-current] { background: #fff; color: #0d0d0d; }
-    .review a[aria-current] small { color: #6b6b6b; }
-
-    /* ------------------------------------------------------------ tokens */
-    :root {
-      --bg: #f3f1ec;
-      --white: #fbfaf7;
-      --ink: #171614;
-      --ink-2: #3d3a35;
-      --muted: #6b675f;
-      --line: #dcd8cf;
-      --bronze: #8a6a3c;
-      --night: #0c0c0d;
-      --ivory: #ece6da;
-      --ivory-2: #b3ab9d;
-      --gold: #c2a477;
-      --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-      --serif: "Cormorant Garamond", "Times New Roman", serif;
-      --gutter: max(22px, env(safe-area-inset-left, 0px));
-      --nav: 56px;
-      --ease: cubic-bezier(.2, .75, .2, 1);
-      color-scheme: light;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
-    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15.5px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
-    img { display: block; max-width: 100%; height: auto; }
-    a { color: inherit; -webkit-tap-highlight-color: transparent; }
-    button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-    button:active { opacity: .6; }
-    h1, h2, h3, p { margin: 0; }
-    h1, h2, h3 { font-weight: 600; letter-spacing: -.035em; line-height: 1; }
-    .label { font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-    .label b { font-weight: 500; color: var(--bronze); margin-right: .6em; }
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
-    :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
-
-    /* ------------------------------------------------------------ nav: clear over the hero, solid after it, dark over the gallery */
-    .nav { position: sticky; top: 0; z-index: 50; height: var(--nav); color: var(--ink); transition: background-color .45s, color .45s, box-shadow .45s; }
-    .nav.solid { background: rgba(243,241,236,.96); box-shadow: 0 1px 0 var(--line); }
-    .nav.dark { background: rgba(12,12,13,.9); color: var(--ivory); box-shadow: none; }
-    .nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; }
-    .brand { font-weight: 600; font-size: 15px; letter-spacing: -.02em; text-decoration: none; }
-    .nav-order { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; font-size: 13.5px; font-weight: 500; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; transition: background-color .45s, color .45s, padding .45s; }
-    .nav.solid .nav-order { min-height: 36px; padding: 0 16px; background: var(--ink); color: var(--white); text-decoration: none; }
-
-    .pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-
-    /* ------------------------------------------------------------ hero */
-    .hero { height: 440vh; height: 440svh; margin-top: calc(var(--nav) * -1); background: #e8e5de; }
-    .hero .pin { background: linear-gradient(180deg, #f6f4ef 0%, #eeebe4 58%, #e6e2d9 100%); }
+    /* ------------------------------------------------------------ opening: the calendar comes apart, goes back together, opens, turns round */
+    .hero { height: 360vh; height: 360svh; margin-top: calc(var(--nav) * -1); background: #e8e4db; }
+    .hero .pin { background: linear-gradient(180deg, #f6f4ef 0%, #efebe3 58%, #e7e2d8 100%); }
     .night { position: absolute; inset: 0; opacity: 0; will-change: opacity; pointer-events: none; }
-    .hero-title { position: absolute; left: var(--gutter); right: var(--gutter); top: calc(var(--nav) + 3.2svh); display: grid; gap: 14px; will-change: transform, opacity; }
-    .byline { font-size: 12.5px; font-weight: 500; letter-spacing: .01em; color: var(--muted); }
+    .hero-title { position: absolute; left: var(--gutter); right: var(--gutter-r); top: calc(var(--nav) + 32px); z-index: 3; display: grid; gap: 16px; justify-items: start; will-change: transform, opacity; }
+    .byline { font-size: 13px; font-weight: 500; color: var(--muted); }
     .byline i { font-style: normal; color: var(--ink); }
-    .hero h1 { font-size: clamp(46px, 12.6vw, 132px); letter-spacing: -.045em; }
-    .hero-title p.sub { font-size: 15.5px; color: var(--ink-2); max-width: 23em; }
-    /* the calendar is drawn at twice its size and shown at half, so the artwork stays sharp */
+    .hero-title .lead { max-width: 24em; }
+    .hero-title .scroll-cue { margin-top: 4px; }
+    /* the calendar is drawn at twice its size and shown at half, so the artwork stays sharp when it zooms */
     .hero-cal { position: absolute; inset: 0; will-change: transform; }
-    .hero-cal .c3 { --w: calc(2 * min(56vw, 30svh, 300px)); perspective-origin: 50% 50%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
-    .dot { position: absolute; left: 0; top: 0; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 11px; font-weight: 600; line-height: 22px; text-align: center; opacity: 0; will-change: opacity, transform; box-shadow: 0 0 0 3px rgba(255,255,255,.8); }
-    .legend { position: absolute; left: var(--gutter); right: var(--gutter); bottom: calc(4.5svh + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; }
-    .legend div { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 9px; align-items: start; opacity: 0; will-change: opacity, transform; }
-    .legend b { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 11px; font-weight: 600; line-height: 22px; text-align: center; }
-    .legend span { font-size: 13px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; }
-    .legend span em { display: block; font-style: normal; font-weight: 400; color: var(--muted); font-size: 12px; letter-spacing: 0; margin-top: 2px; }
-    .cap { position: absolute; left: var(--gutter); right: var(--gutter); bottom: calc(5svh + env(safe-area-inset-bottom, 0px)); display: grid; gap: 6px; opacity: 0; will-change: opacity, transform; }
-    .cap p { font-size: clamp(24px, 6.6vw, 40px); font-weight: 600; letter-spacing: -.035em; line-height: 1.08; }
+    .hero-cal .c3 { --w: calc(2 * min(56vw, 30svh, 300px)); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); perspective-origin: 50% 50%; }
+    #dots .mk { position: absolute; left: 0; top: 0; margin: -10px 0 0 -10px; opacity: 0; will-change: opacity, transform; }
+    .legend { position: absolute; left: var(--gutter); right: var(--gutter-r); bottom: calc(28px + env(safe-area-inset-bottom, 0px)); z-index: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+    .legend > div { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; opacity: 0; will-change: opacity, transform; }
+    .legend strong { display: block; font-size: 14px; font-weight: 500; line-height: 1.3; }
+    .legend em { display: block; font-style: normal; font-size: 13px; line-height: 1.35; color: var(--muted); }
+    .cap { position: absolute; left: var(--gutter); right: var(--gutter-r); bottom: calc(32px + env(safe-area-inset-bottom, 0px)); z-index: 3; display: grid; gap: 8px; opacity: 0; will-change: opacity, transform; }
+    .cap p:last-child { font-size: clamp(26px, 7vw, 44px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
     .cap.light { color: var(--ivory); }
     .cap.light .label { color: var(--ivory-2); }
-    .scroll-hint { position: absolute; right: var(--gutter); bottom: calc(4.5svh + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 8px; }
-    .scroll-hint svg { width: 14px; height: 14px; animation: nudge 1.8s ease-in-out infinite; }
-    @keyframes nudge { 50% { transform: translateY(4px); } }
 
-    /* ------------------------------------------------------------ swipe hint and arrows */
-    .swipe { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: opacity .6s; }
-    .swipe svg { width: 26px; height: 12px; animation: slide 2s var(--ease) infinite; }
-    @keyframes slide { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(7px); } }
-    .swipe.done { opacity: 0; }
-    .arrows { display: flex; gap: 8px; }
-    .arrows button { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid currentColor; opacity: .85; transition: opacity .3s; }
-    .arrows button:disabled { opacity: .25; cursor: default; }
-    .arrows svg { width: 16px; height: 16px; }
-
-    /* ------------------------------------------------------------ gallery: the twelve photographs, tinted by each one */
-    .gallery { position: relative; background-color: #121214; color: var(--ivory); padding: 26px 0 50px; overflow: hidden; transition: background-color 1s var(--ease); }
-    .g-head { display: grid; gap: 12px; margin-bottom: 18px; }
-    .g-head .label { color: var(--ivory-2); }
-    .g-head .label b { color: var(--gold); }
-    .g-head h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 11vw, 96px); letter-spacing: -.01em; line-height: .95; margin-top: 10px; }
-    .g-head h2 em { font-style: italic; }
-    .g-head .swipe { color: var(--gold); padding-bottom: 6px; }
-    .rail { --slide: min(84vw, calc((100svh - 236px) * .773), 560px); display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 calc((100vw - var(--slide)) / 2); }
+    /* ------------------------------------------------------------ the twelve photographs, on the colour of each */
+    .gallery { color: var(--ivory); background: #141516; }
+    .gallery .label { color: var(--ivory-2); }
+    .gallery .label b { color: var(--gold); }
+    .gallery .head { margin-bottom: 24px; }
+    .gallery .hint { color: var(--gold); }
+    .rail { --pad: var(--gutter); --slide: min(calc(100vw - 72px), calc((100svh - 226px) * .773), 440px); display: flex; gap: 12px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 calc(100vw - var(--pad) - var(--slide)) 0 var(--pad); scroll-padding-left: var(--pad); }
     .rail::-webkit-scrollbar { display: none; }
-    .slide { flex: 0 0 var(--slide); scroll-snap-align: center; scroll-snap-stop: always; margin: 0; padding: 0 8px; }
-    .slide .in { display: grid; gap: 12px; transform-origin: 50% 50%; }
-    .slide.near .in { will-change: transform, opacity; }
-    .slide .top { display: flex; align-items: baseline; gap: 12px; }
-    .slide .rn { font-family: var(--serif); font-weight: 300; font-size: 30px; line-height: 1; }
-    .slide .mn { font-size: 10.5px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+    .slide { flex: 0 0 var(--slide); margin: 0; scroll-snap-align: start; scroll-snap-stop: always; display: grid; gap: 14px; align-content: start; transition: opacity .45s var(--ease); }
+    .slide.dim { opacity: .5; }
+    .slide button { display: block; width: 100%; cursor: zoom-in; }
     .slide img { width: 100%; aspect-ratio: 800 / 1035; }
-    .slide figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-    .slide .t { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 21px; line-height: 1.2; }
-    .slide .p { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ivory-2); white-space: nowrap; }
-    .g-foot { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 22px; }
-    .ticks { flex: 1; display: flex; gap: 5px; }
-    .ticks button { flex: 1; height: 24px; position: relative; }
-    .ticks button::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(236,230,218,.2); }
-    .ticks button::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: 0 0; transition: transform .45s var(--ease); }
-    .ticks button.on::after { transform: none; }
-    .g-count { font-size: 11px; font-weight: 500; letter-spacing: .08em; color: var(--ivory-2); min-width: 4.6em; text-align: right; font-variant-numeric: tabular-nums; }
+    .slide figcaption { display: grid; gap: 4px; }
+    .g-foot { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
+    .g-foot .prog { flex: 1; }
+    .gallery .prog b { transition: transform .45s var(--ease); }
     .gallery .arrows { display: none; color: var(--ivory); }
-
-    /* ------------------------------------------------------------ planner: swipe through the features */
-    .planner { padding: 96px 0 84px; }
-    .p-head { display: grid; gap: 12px; margin-bottom: 26px; }
-    .p-head h2 { font-size: clamp(40px, 11vw, 96px); }
-    .p-head p { color: var(--ink-2); max-width: 26em; }
-    .p-grid { display: grid; }
-    .p-grid > *, .g-foot > * { min-width: 0; }
-    .p-view { position: relative; overflow: hidden; aspect-ratio: 4 / 3.8; max-height: 60svh; background: #e9e5dc; touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }
-    .p-view:active { cursor: grabbing; }
-    .tour-frame { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
-    .tour-frame img { width: 100%; aspect-ratio: 700 / 905; -webkit-user-drag: none; }
-    .mark { position: absolute; border: 1.4px solid var(--bronze); border-radius: 2px; opacity: 0; pointer-events: none; }
-    .p-panel { padding: 14px 0 0; }
-    .segs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-bottom: 2px; }
-    .segs button { height: 24px; position: relative; }
-    .segs button::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--line); }
-    .segs button b { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--ink); transform: scaleX(0); transform-origin: 0 0; }
-    .cards { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
-    .cards::-webkit-scrollbar { display: none; }
-    .card { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; padding: 8px 0 2px; display: grid; gap: 7px; align-content: start; min-height: 108px; }
-    .card h3 { font-size: 24px; letter-spacing: -.03em; line-height: 1.1; }
-    .card p { color: var(--ink-2); font-size: 14.5px; max-width: 30em; }
-    .p-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; min-height: 44px; }
-    .planner .arrows { color: var(--ink); }
-
-    /* ------------------------------------------------------------ note, details, order */
-    .note { padding: 40px 0 90px; }
-    .note .wrap { display: grid; gap: 18px; max-width: 760px; }
-    .note p.body { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(25px, 6.6vw, 38px); line-height: 1.3; letter-spacing: -.005em; }
-    .note .sig { font-size: 13px; color: var(--muted); }
-
-    .details { padding: 0 0 80px; }
-    .details h2 { font-size: 22px; letter-spacing: -.03em; margin: 10px 0 16px; }
-    .table { border-top: 1px solid var(--ink); }
-    .table div { display: grid; grid-template-columns: 7.4em minmax(0, 1fr); gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
-    .table dt { font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
-    .table dd { margin: 0; font-size: 13.5px; line-height: 1.45; }
-    dl { margin: 0; }
-
-    .order { background: var(--white); padding: 72px 0 64px; overflow: hidden; }
-    .order .wrap { display: grid; gap: 26px; }
-    .order-cal { justify-self: center; position: relative; width: calc(min(46vw, 220px) * 1.3); height: calc(min(46vw, 220px) * 1.8); }
-    .order-cal > div { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(.5); }
-    .order-cal .c3 { --w: calc(2 * min(46vw, 220px)); }
-    .order h2 { font-size: clamp(36px, 10vw, 64px); }
-    .order .price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
-    .order .price b { font-size: 28px; font-weight: 600; letter-spacing: -.03em; }
-    .order .price span { color: var(--ink-2); font-size: 14.5px; }
-    .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; counter-reset: s; font-size: 14px; color: var(--ink-2); }
-    .steps li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; counter-increment: s; }
-    .steps li::before { content: counter(s); font-size: 11px; font-weight: 600; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; margin-top: 1px; color: var(--ink); }
-    .btn { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 0 22px; background: var(--ink); color: var(--white); text-decoration: none; font-weight: 500; font-size: 16.5px; letter-spacing: -.01em; transition: transform .25s var(--ease); }
-    .btn svg { width: 20px; height: 20px; transition: transform .35s var(--ease); }
-    .btn.in:active, .btn:active { transform: scale(.975); transition-duration: .08s; }
-    @media (hover: hover) { .btn:hover svg { transform: translateX(4px); } }
-
-    footer { background: var(--white); padding: 0 0 calc(30px + env(safe-area-inset-bottom, 0px)); font-size: 12px; color: var(--muted); }
-    footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
-
-    [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
-    [data-reveal].in { opacity: 1; transform: none; }
-
-    .toast { position: fixed; left: 50%; top: calc(66px + env(safe-area-inset-top, 0px)); z-index: 80; transform: translate(-50%, -10px); opacity: 0; background: var(--ink); color: #fff; padding: 11px 16px; font-size: 13px; transition: opacity .3s, transform .4s; pointer-events: none; }
-    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (hover: hover) and (pointer: fine) { .gallery .hint { display: none; } .gallery .arrows { display: flex; } }
 
     @media (min-width: 900px) {
-      .hero-title { left: max(var(--gutter), calc((100vw - 1200px) / 2 + 22px)); right: auto; max-width: 56vw; }
-      .cap { left: max(var(--gutter), calc((100vw - 1200px) / 2 + 22px)); right: auto; max-width: 560px; }
-      .legend { left: auto; right: max(var(--gutter), calc((100vw - 1200px) / 2)); width: 360px; grid-template-columns: 1fr; bottom: 12svh; }
-      .gallery { padding: 40px 0 64px; }
-      .g-head { display: flex; justify-content: space-between; align-items: end; }
-      .rail { --slide: min(calc((100svh - 260px) * .773), 520px); padding-left: max(var(--gutter), calc((100vw - 1200px) / 2 + 14px)); scroll-padding-left: max(var(--gutter), calc((100vw - 1200px) / 2 + 14px)); }
-      .slide { scroll-snap-align: start; }
-      .gallery .arrows { display: flex; }
-      .p-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; column-gap: 56px; }
-      .p-view { max-height: 76svh; aspect-ratio: 4 / 4.2; }
-      .card h3 { font-size: 34px; }
-      .card p { font-size: 16px; }
-      .details .wrap { display: grid; grid-template-columns: minmax(0, .5fr) minmax(0, 1.5fr); gap: 60px; }
-      .details .table { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; border-top: 0; }
-      .details .table div { border-top: 1px solid var(--line); border-bottom: 0; }
-      .order .wrap { grid-template-columns: 1fr 1fr; align-items: center; }
-      .order-cal { order: 2; }
-      .btn { max-width: 420px; }
+      .hero-title { left: max(var(--gutter), calc((100vw - 1200px) / 2 + 24px)); right: auto; max-width: min(62vw, 820px); }
+      .cap { left: max(var(--gutter), calc((100vw - 1200px) / 2 + 24px)); right: auto; max-width: 560px; }
+      .legend { left: auto; right: max(var(--gutter-r), calc((100vw - 1200px) / 2 + 24px)); width: 320px; grid-template-columns: 1fr; bottom: 12svh; }
+      .rail { --pad: max(var(--gutter), calc((100vw - 1200px) / 2 + 24px)); --slide: min(calc((100svh - 300px) * .773), 420px); }
     }
-    @media (max-width: 899px) { .planner .arrows { display: none; } }
-    @media (prefers-reduced-motion: reduce) { .scroll-hint svg, .swipe svg { animation: none; } }
+    /* phones on their side: words on the left, calendar on the right */
+    @media (orientation: landscape) and (max-height: 520px) {
+      .hero-title { right: 54%; top: calc(var(--nav) + 16px); gap: 10px; }
+      .hero-title .display { font-size: clamp(30px, 11svh, 52px); }
+      .hero-title .lead { font-size: 15px; }
+      .hero-cal .c3 { --w: calc(2 * min(40svh, 220px)); }
+      .legend { right: 54%; grid-template-columns: 1fr; gap: 6px; bottom: 16px; }
+      .legend em { display: none; }
+      .cap { right: 54%; bottom: 20px; }
+      .rail { --slide: min(calc((100svh - 150px) * .773), 300px); }
+    }
   </style>
 </head>
 <body>
@@ -239,313 +97,284 @@
   <header class="nav" id="nav">
     <div class="wrap">
       <a class="brand" href="#top">Desk Calendar 2027</a>
-      <a class="nav-order" href="#order">Order</a>
+      <a class="nav-order" href="#order" data-order>Order</a>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero" id="hero" aria-label="Introduction">
+    <section class="hero" id="hero" aria-label="The calendar">
       <div class="pin" id="heroPin">
         <div class="night" id="night"></div>
+        <div class="bars" id="bars"></div>
         <div class="hero-title" id="heroTitle">
           <p class="byline">designed by Sim <i>:D</i></p>
-          <h1>Desk Calendar<br>2027</h1>
-          <p class="sub">Twelve of my photographs, with a planner page for every month. Made for friends, and friends of friends.</p>
+          <h1 class="display">Desk Calendar<br>2027</h1>
+          <p class="lead">Twelve of my photographs, with a planner page for every month. Made for friends, and friends of friends.</p>
+          <p class="label scroll-cue" aria-hidden="true">Scroll <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1v10M2 7l4 4 4-4"/></svg></p>
         </div>
-        <div class="hero-cal" id="heroCalWrap"><div id="heroCal" role="img" aria-label="The desk calendar pulled apart into its layers, put back together, opened to the January planner, then turned around to show January's photograph on the back"></div></div>
-        <div id="dots"></div>
+        <div class="hero-cal" id="heroCalWrap"><div id="heroCal" role="img" aria-label="The desk calendar: pulled apart into its layers, put back together, opened to the January planner, then turned round to show January's photograph on the back"></div></div>
+        <div id="dots" aria-hidden="true"></div>
         <div class="legend" id="legend">
-          <div><b>1</b><span>Cover<em>2027, in King's Cross steel</em></span></div>
-          <div><b>2</b><span>January planner<em>Faces you</em></span></div>
-          <div><b>3</b><span>February to December<em>A photo on every back</em></span></div>
-          <div><b>4</b><span>Stand<em>148 × 220 mm, wire-bound</em></span></div>
+          <div><i class="mk" aria-hidden="true">1</i><span><strong>Cover</strong><em>2027, in King's Cross steel</em></span></div>
+          <div><i class="mk" aria-hidden="true">2</i><span><strong>January planner</strong><em>Faces you</em></span></div>
+          <div><i class="mk" aria-hidden="true">3</i><span><strong>February to December</strong><em>Eleven more sheets, printed on both sides</em></span></div>
+          <div><i class="mk" aria-hidden="true">4</i><span><strong>Wire binding and stand</strong><em>148&nbsp;×&nbsp;220&nbsp;mm</em></span></div>
         </div>
-        <div class="cap" id="capA"><span class="label">The front</span><p>This side is yours.</p></div>
-        <div class="cap light" id="capB"><span class="label">Turned around</span><p>This side faces the room.</p></div>
-        <p class="scroll-hint label" id="hint">Scroll <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></p>
+        <div class="cap" id="capA"><p class="label">The front</p><p>This side is yours.</p></div>
+        <div class="cap light" id="capB"><p class="label">Turned round</p><p>This side faces the room.</p></div>
       </div>
     </section>
 
-    <section class="gallery" id="photos" aria-label="The twelve photographs">
-      <div class="wrap g-head">
-        <div><p class="label" id="gLabel"><b>01</b>12 photographs</p><h2>Twelve <em>months</em></h2></div>
-        <span class="swipe" id="gHint">Swipe through all twelve <svg viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h23M19 1l5 5-5 5"/></svg></span>
+    <section class="sec gallery on-dark" id="photos" aria-labelledby="photos-h">
+      <div class="wrap head">
+        <p class="label"><b>01</b>The photographs</p>
+        <h2 id="photos-h">Twelve <em>months</em></h2>
+        <p class="label hint" id="gHint">Swipe through <svg viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h21M18 1l4 4-4 4"/></svg></p>
       </div>
-      <div class="rail" id="rail" tabindex="0" aria-label="Photo pages, January to December"></div>
+      <div class="rail" id="rail" role="region" aria-label="Photo pages, January to December. Tap the one in front to see it larger."></div>
       <div class="wrap g-foot">
-        <div class="ticks" id="ticks"></div>
-        <span class="g-count" id="gCount">01 / 12</span>
+        <div class="prog" id="ticks"></div>
+        <span class="label count" id="gCount" aria-hidden="true">01 / 12</span>
         <div class="arrows"><button id="gPrev" aria-label="Previous month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button id="gNext" aria-label="Next month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
       </div>
     </section>
 
-    <section class="planner" id="planner" aria-label="The planner page">
-      <div class="wrap p-head" data-reveal><p class="label"><b>02</b>The planner</p><h2>Your side.</h2><p>The side that faces you: a full A5 page for every month.</p></div>
+    <section class="sec planner" id="planner" aria-labelledby="planner-h">
+      <div class="wrap head" data-reveal>
+        <p class="label"><b>02</b>The planner</p>
+        <h2 id="planner-h">Your side</h2>
+        <p class="lead">A full A5 page for every month, facing you.</p>
+      </div>
       <div class="wrap p-grid">
-        <div class="p-view" id="tourView" role="img" aria-label="The January 2027 planner page, zoomed to the feature described beside it"><div class="tour-frame" id="tourFrame"><img src="assets/planner-jan.webp" width="2000" height="2586" alt="" loading="lazy" fetchpriority="low" decoding="async" draggable="false"><span class="mark" id="mark"></span></div></div>
+        <div class="p-view" role="img" aria-label="The January 2027 planner page, zoomed to the feature described alongside">
+          <div class="tour-frame"><img src="assets/planner-jan.webp" width="2000" height="2586" alt="" loading="lazy" fetchpriority="low" decoding="async" draggable="false"><span class="mark"></span></div>
+          <span class="label p-tag" aria-hidden="true">Swipe or tap <svg viewBox="0 0 24 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h21M18 1l4 4-4 4"/></svg></span>
+        </div>
         <div class="p-panel">
-          <div class="segs" id="segs"></div>
-          <div class="cards" id="cards" tabindex="0" aria-label="Planner features">
-            <article class="card"><span class="label">01 / 06</span><h3>A page for every month</h3><p>A full A5 page to plan on, not a strip under a photo.</p></article>
-            <article class="card"><span class="label">02 / 06</span><h3>Room to write</h3><p>Big date squares. Weeks start on Sunday.</p></article>
-            <article class="card"><span class="label">03 / 06</span><h3>Holidays marked</h3><p>Printed on the day, like New Year's Day and Thaipusam.</p></article>
-            <article class="card"><span class="label">04 / 06</span><h3>Months either side</h3><p>December and February, for plans that cross a month end.</p></article>
-            <article class="card"><span class="label">05 / 06</span><h3>Week numbers</h3><p>Down the side of every row.</p></article>
-            <article class="card"><span class="label">06 / 06</span><h3>To-do and notes</h3><p>At the foot of every month.</p></article>
+          <div class="prog"></div>
+          <div class="cards" role="region" aria-label="Planner features" tabindex="0">
+            <article class="card"><h3>A page for every month</h3><p>Not a strip under a photo: the whole page is yours to plan on.</p></article>
+            <article class="card"><h3>Room to write</h3><p>Big date squares, with weeks that start on Sunday.</p></article>
+            <article class="card"><h3>Holidays marked</h3><p>Malaysian public holidays, printed on the day.</p></article>
+            <article class="card"><h3>Months either side</h3><p>Last month and next, for plans that spill over.</p></article>
+            <article class="card"><h3>Week numbers</h3><p>Down the side of every row.</p></article>
+            <article class="card"><h3>To-do and notes</h3><p>A list and a notes panel at the foot of every month.</p></article>
           </div>
           <div class="p-foot">
-            <span class="swipe" id="pHint">Swipe to explore <svg viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h23M19 1l5 5-5 5"/></svg></span>
-            <div class="arrows"><button id="pPrev" aria-label="Previous feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button id="pNext" aria-label="Next feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
+            <span class="label count" aria-hidden="true">01 / 06</span>
+            <div class="arrows"><button class="p-prev" aria-label="Previous feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button class="p-next" aria-label="Next feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- A draft in Sim's voice: rewrite it in your own words. -->
-    <section class="note" aria-label="A note from Sim">
+    <section class="sec note" aria-labelledby="note-h">
       <div class="wrap">
-        <p class="label" data-reveal><b>03</b>A note</p>
-        <p class="body" data-reveal>I took these over the past year, at home in KL and on the road. I wanted them somewhere I'd see them every day, so I made them into a calendar, and printed a few more for friends.</p>
+        <p class="label" id="note-h" data-reveal><b>03</b>A note</p>
+        <p class="body" data-reveal>I took these over the past year, at home in KL and on the road. I wanted them somewhere I'd see them every day, so I made them into a calendar and printed a few more for friends.</p>
         <p class="sig" data-reveal>Sim</p>
       </div>
     </section>
 
-    <section class="details" aria-label="Details">
+    <section class="sec details" aria-labelledby="details-h">
       <div class="wrap">
-        <div data-reveal><p class="label"><b>04</b>Details</p><h2>Details</h2></div>
+        <div class="head" data-reveal><p class="label"><b>04</b>Details</p><h2 id="details-h">What you get</h2></div>
         <dl class="table" data-reveal>
-          <div><dt>Size</dt><dd>A5 pages, 148 × 210 mm · 148 × 220 mm with the wire binding</dd></div>
-          <div><dt>Format</dt><dd>Desk calendar on a stand, printed on both sides: the planner faces you, the month's photograph faces the room</dd></div>
-          <div><dt>Planner</dt><dd>Sunday start · holidays · week numbers · months either side · to-do · notes</dd></div>
-          <div><dt>Photographs</dt><dd id="specPhotos">12, my own</dd></div>
-          <div><dt>Delivery</dt><dd>Free in Malaysia and Singapore</dd></div>
-          <div><dt>Price</dt><dd>RM 49</dd></div>
+          <div><dt>Size</dt><dd>A5 pages, 148&nbsp;×&nbsp;210&nbsp;mm; 148&nbsp;×&nbsp;220&nbsp;mm with the wire binding</dd></div>
+          <div><dt>Format</dt><dd>Desk calendar on a stand, printed on both sides. The planner faces you; the month's photograph faces the room.</dd></div>
+          <div><dt>Planner</dt><dd>Sunday start · Malaysian public holidays · week numbers · the months either side · to-do · notes</dd></div>
+          <div><dt>Photographs</dt><dd data-fill="places">12, all mine</dd></div>
+          <div><dt>Delivery</dt><dd data-fill="delivery"></dd></div>
+          <div><dt>Price</dt><dd data-fill="price">RM 49</dd></div>
         </dl>
       </div>
     </section>
 
-    <section class="order" id="order" aria-label="Order">
-      <div class="wrap">
-        <div class="order-cal" id="orderCalScene"><div><div id="orderCal" role="img" aria-label="The desk calendar, showing January's photograph"></div></div></div>
-        <div style="display:grid; gap:18px">
+    <section class="sec order" aria-labelledby="order-h">
+      <div class="wrap order-grid">
+        <div class="order-copy" id="order">
           <p class="label" data-reveal><b>05</b>Order</p>
-          <h2 data-reveal>One for your desk</h2>
-          <p class="price" data-reveal><b>RM 49</b><span>Delivered free in Malaysia and Singapore</span></p>
+          <h2 id="order-h" data-reveal>One for your desk</h2>
+          <p class="price" data-reveal><b data-fill="price">RM 49</b><span data-fill="delivery"></span></p>
+          <a class="btn" href="#order" data-order="final" data-reveal>Order a copy <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <p class="order-note" id="orderNote" role="status" aria-live="polite"></p>
           <ol class="steps" data-reveal>
             <li>Fill in a short form.</li>
             <li>I'll message you to confirm and sort out payment.</li>
-            <li>Your calendar is on its way.</li>
+            <li>I post it to you.</li>
           </ol>
-          <a class="btn" href="#order" data-order="final" data-reveal>Order a copy <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
+        <div class="order-cal" id="orderCalScene"><div id="orderCal" role="img" aria-label="The desk calendar on its stand, showing the cover"></div></div>
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap"><span>Desk Calendar 2027</span><span>Photographs and design by Sim, 2026</span></div></footer>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <footer><div class="wrap label"><span>Desk Calendar 2027</span><span>Photographs and design by Sim, 2026</span></div></footer>
 
   <script src="assets/js/content.js"></script>
   <script src="assets/js/motion.js"></script>
+  <script src="assets/js/site.js"></script>
   <script>
   (function () {
-    const { scene, onFrame, onMeasure, seg, lerp, ease, clamp, Calendar3D, PlannerTour } = Motion;
-    const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
-    const toast = $("#toast"); let tt;
-    wireOrderLinks(m => { toast.textContent = m; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2400); });
+    const { scene, onMeasure, seg, lerp, ease, clamp, Calendar3D, reveals, reduced } = Motion;
+    const { $, $$, ROMAN, mix, fill, Nav, Tint, Bars, viewer, Planner, Order, smooth } = Site;
+    reveals(); fill(); Order();
     const P = CAL.PAGES;
-    // a photograph's colour, deepened into the night of the gallery
-    const tint = (hex, amt = .2) => { const n = parseInt(hex.slice(1), 16), m = [12, 12, 13]; return `rgb(${[(n >> 16) & 255, (n >> 8) & 255, n & 255].map((c, i) => Math.round(m[i] + (c - m[i]) * amt)).join(",")})`; };
+    const night = hex => mix(hex, [14, 14, 15], .22);          // a photograph's colour, deepened into the dark
+    const NIGHT0 = night(P[0].tone), IVORY = "#ede7dc", INK = "#1a1814";
+    const fade = (el, o, dy = 10) => { el.style.opacity = o.toFixed(3); el.style.transform = `translate3d(0, ${((1 - o) * dy).toFixed(1)}px, 0)`; };
+    const top = el => el.getBoundingClientRect().top + scrollY;
 
-    /* ------------------------------------------------------------ hero
-       front → pulled apart → put back → cover flips to the January planner → turned around → pushed in on January's photograph */
-    const calEl = $("#heroCal");
-    const cal = Calendar3D(calEl, { sheets: CAL.DUPLEX, stand: "white", blanks: 5 });
-    const title = $("#heroTitle"), wrap = $("#heroCalWrap"), pin = $("#heroPin"), night = $("#night");
-    const legend = $$("#legend > div"), capA = $("#capA"), capB = $("#capB"), hint = $("#hint");
-    night.style.background = tint(P[0].tone);
-    let H = innerHeight, W = 400, VW = innerWidth, PERS = 3600, END = 1.8;
-    const EX = { ry: -36, rx: -12 }, GAP = .36, LIFT = .18;
-    // zoom k by moving the calendar towards the viewer: perspective scales it, the artwork stays sharp
-    const zoom = k => PERS * (1 - 1 / k);
+    /* ------------------------------------------------------------ opening */
+    const hero = $("#hero"), pin = $("#heroPin"), title = $("#heroTitle"), wrap = $("#heroCalWrap"), calEl = $("#heroCal");
+    const cal = Calendar3D(calEl, { sheets: CAL.DUPLEX, stand: "white", blanks: 3 });
+    const legend = $$("#legend > div"), capA = $("#capA"), capB = $("#capB"), nightEl = $("#night"), barsEl = $("#bars");
+    nightEl.style.background = NIGHT0;
+    const bars = Bars(barsEl, [[0, .32], [.32, .56], [.56, .78], [.78, .99]]);
+    // W: sheet width in the drawn (double-size) calendar; IX/IY: where it sits on screen at the start; HX: where it sits after
+    let H = innerHeight, VW = innerWidth, W = 400, PERS = 3600, END = 1.6, IX = 0, IY = 0, HX = 0, HY = 0;
+    const zoom = k => PERS * (1 - 1 / k);                     // move it towards the viewer: perspective scales it, the artwork stays sharp
     function pose(p) {
       const intro = ease.inOut(seg(p, 0, .09));
-      const into = ease.inOut(seg(p, .06, .2)), out = ease.inOut(seg(p, .32, .42)), x = into * (1 - out);
-      const turn = ease.inOut(seg(p, .6, .76)), push = ease.inOut(seg(p, .8, .99));
+      const into = ease.inOut(seg(p, .06, .18)), out = ease.inOut(seg(p, .32, .42)), x = into * (1 - out);
+      const turn = ease.inOut(seg(p, .6, .76)), push = reduced ? 0 : ease.inOut(seg(p, .8, .99));
       const k = lerp(.8, .96, intro) - x * .14 + ease.inOut(seg(p, .42, .5)) * .08 + push * (END - 1.04);
       return {
-        y: lerp(H * .3, H * -.02, intro) + x * H * .05 + push * H * .015,
+        sx: lerp(IX, HX, intro),
+        sy: lerp(IY, HY, intro) + x * H * .05 + push * H * .015,
         z: zoom(k),
-        ry: lerp(-8, lerp(EX.ry, EX.ry - 8, seg(p, .2, .32)), into) * (1 - out) + out * (-4 + turn * 176 + push * 8),
-        rx: lerp(-8, EX.rx, x) * (1 - turn) + turn * (-8 * (1 - push)) - 14 * Math.sin(Math.PI * turn),
-        px: x * .3,
-        ex: x,
-        g: 1 - push
+        ry: lerp(-8, lerp(-36, -44, seg(p, .18, .32)), into) * (1 - out) + out * (-4 + turn * 176 + push * 8),
+        rx: lerp(-8, -12, x) * (1 - turn) + turn * (-8 * (1 - push)) - 14 * Math.sin(Math.PI * turn),
+        px: x * .3, ex: x, g: 1 - push
       };
     }
     function apply(q) {
-      wrap.style.transform = `translate3d(0, ${q.y.toFixed(1)}px, 0) scale(.5)`;
+      wrap.style.transform = `translate3d(${q.sx.toFixed(1)}px, ${q.sy.toFixed(1)}px, 0) scale(.5)`;
       cal.view({ ry: q.ry, rx: q.rx, x: W * q.px, z: q.z });
-      cal.explode(q.ex, W * GAP, W * LIFT);
+      cal.explode(q.ex, W * .36, W * .18);
       cal.ground(q.g, 1);
     }
-    // where each layer's corner sits in the exploded pose, measured once per layout so nothing is read while scrolling
-    $("#dots").innerHTML = [1, 2, 3, 4].map(n => `<span class="dot">${n}</span>`).join("");
-    const dots = $$("#dots .dot");
+    $("#dots").innerHTML = [1, 2, 3, 4].map(n => `<i class="mk">${n}</i>`).join("");
+    const dots = $$("#dots .mk");
     let anchors = [];
     onMeasure(vh => {
       H = vh; VW = innerWidth;
+      const land = VW > H && H < 520, wide = VW >= 900 && VW > H;
       W = calEl.querySelector(".c3-sheet").offsetWidth;
       PERS = W * 1.07 * 9;
-      END = Math.min(.74 * VW, .56 * H / 1.419) * 2 / W;     // the photo page fills most of the width, the stand still in view
-      apply(pose(.27));
-      const pr = pin.getBoundingClientRect();
-      const r = i => cal.sheets[i].querySelector(".c3-face").getBoundingClientRect();
+      END = Math.min(.74 * VW, .56 * H / 1.419) * 2 / W;        // January's page fills most of the screen, the stand still in view
+      HY = land ? H * .07 : -H * .02;
+      if (land) { IX = HX = VW * .2; IY = HY; }
+      else if (wide) { IX = VW * .24; HX = 0; IY = 0; }
+      else {
+        // on a phone the calendar starts just under the words, rather than at the foot of the screen
+        IX = HX = 0;
+        IY = Math.max(0, title.offsetTop + title.offsetHeight + 28 + (W / 2) * .8 * .82 - H / 2);
+      }
+      // where each layer's corner sits in the exploded view, measured once per layout
+      apply(pose(.26));
+      const pr = pin.getBoundingClientRect(), face = i => cal.sheets[i].querySelector(".c3-face").getBoundingClientRect();
       const board = calEl.querySelector(".c3-front > .c3-plane").getBoundingClientRect();
-      anchors = [r(0), r(1), r(2)].map(b => [b.right - pr.left - 14, b.top - pr.top + 14]);
+      anchors = [face(0), face(1), face(2)].map(b => [b.right - pr.left - 14, b.top - pr.top + 14]);
       anchors.push([board.right - pr.left - 12, board.bottom - pr.top - 22]);
     });
-    const fade = (el, o, dy = 10) => { el.style.opacity = o.toFixed(3); el.style.transform = `translate3d(0, ${((1 - o) * dy).toFixed(1)}px, 0)`; };
     let heroDark = false;
-    scene($("#hero"), p => {
-      title.style.opacity = (1 - seg(p, .01, .08)).toFixed(3);
-      title.style.transform = `translate3d(0, ${(-40 * ease.inOut(seg(p, 0, .09))).toFixed(1)}px, 0)`;
-      hint.style.opacity = (1 - seg(p, 0, .03)).toFixed(3);
+    scene(hero, p => {
+      const t = seg(p, .01, .07);
+      title.style.opacity = (1 - t).toFixed(3);
+      title.style.transform = `translate3d(0, ${(-36 * ease.inOut(seg(p, 0, .09))).toFixed(1)}px, 0)`;
+      title.style.visibility = t >= 1 ? "hidden" : "";
       apply(pose(p));
-      const show = seg(p, .17, .23) * (1 - seg(p, .32, .36));
+      const show = seg(p, .15, .2) * (1 - seg(p, .31, .35));
       dots.forEach((d, i) => {
         const o = clamp(show * 1.6 - i * .2), a = anchors[i] || [0, 0];
         d.style.opacity = o.toFixed(3);
         d.style.transform = `translate3d(${a[0].toFixed(1)}px, ${a[1].toFixed(1)}px, 0) scale(${(.6 + .4 * o).toFixed(3)})`;
       });
       legend.forEach((l, i) => fade(l, clamp(show * 1.6 - i * .2)));
-      cal.flip(0, ease.inOut(seg(p, .43, .56)));
-      fade(capA, seg(p, .52, .56) * (1 - seg(p, .6, .64)));
-      night.style.opacity = ease.inOut(seg(p, .78, .9)).toFixed(3);
-      fade(capB, seg(p, .74, .79) * (1 - seg(p, .9, .96)));
-      heroDark = p > .84;
+      cal.flip(0, ease.inOut(seg(p, .42, .54)));
+      fade(capA, seg(p, .5, .54) * (1 - seg(p, .58, .62)));
+      nightEl.style.opacity = ease.inOut(seg(p, .74, .88)).toFixed(3);
+      fade(capB, seg(p, .72, .77) * (1 - seg(p, .9, .95)));
+      const dark = p > .8;
+      if (dark !== heroDark) {
+        heroDark = dark;
+        barsEl.style.setProperty("--bars-track", dark ? "rgba(237,231,220,.22)" : "");
+        barsEl.style.setProperty("--bars-fill", dark ? IVORY : "");
+        // the strip below the stage, seen when Safari's toolbar hides, matches the stage
+        hero.style.backgroundColor = dark ? NIGHT0 : "";
+      }
+      bars(p);
     }, "pin", { smooth: 90 });
 
-    /* ------------------------------------------------------------ nav: clear over the hero, dark over the gallery, solid elsewhere */
-    const nav = $("#nav"), gallery = $("#photos"), hero = $("#hero");
-    let gTop = 0, gBottom = 0, hEnd = 0, navState = "";
-    onMeasure(vh => {
-      gTop = gallery.getBoundingClientRect().top + scrollY; gBottom = gTop + gallery.offsetHeight;
-      hEnd = hero.getBoundingClientRect().top + scrollY + hero.offsetHeight - vh;
-    });
-    onFrame(y => {
-      const line = y + 28;
-      const s = line < hEnd ? (heroDark ? "dark" : "") : line < gBottom ? "dark" : "solid";
-      if (s !== navState) { nav.classList.remove(navState || "x"); if (s) nav.classList.add(s); navState = s; }
-    });
-
-    /* ------------------------------------------------------------ gallery: a native swipe row, so it never holds up the page */
-    const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-    const rail = $("#rail");
+    /* ------------------------------------------------------------ the twelve photographs */
+    const gallery = $("#photos"), rail = $("#rail"), tint = Tint(gallery);
     rail.innerHTML = P.map((pg, i) => `
-      <figure class="slide" aria-label="${CAL.MONTHS[i]}">
-        <div class="in">
-          <div class="top"><span class="rn">${ROMAN[i]}</span><span class="mn">${CAL.MONTHS[i]}</span></div>
-          <img src="${pg.webp}" width="800" height="1035" alt="${pg.title}, ${pg.place}" loading="${i < 2 ? "eager" : "lazy"}" decoding="async" draggable="false" style="background:${pg.tone}">
-          <figcaption><span class="t">${pg.title}</span><span class="p">${pg.place}</span></figcaption>
-        </div>
+      <figure class="slide${i ? " dim" : ""}" data-i="${i}">
+        <button type="button" aria-label="${CAL.MONTHS[i]}: ${pg.title}, ${pg.place}"><img src="${pg.webp}" width="800" height="1035" alt="" loading="${i ? "lazy" : "eager"}" decoding="async" draggable="false" style="background:${pg.tone}"></button>
+        <figcaption><span class="label">${ROMAN[i]} · ${CAL.MONTHS[i]} · ${pg.place}</span><span class="title-i">${pg.title}</span></figcaption>
       </figure>`).join("");
-    $("#ticks").innerHTML = P.map((_, i) => `<button aria-label="${CAL.MONTHS[i]}"></button>`).join("");
-    const figs = $$(".slide"), slides = $$(".slide .in"), imgs = $$(".slide img"), ticks = $$("#ticks button"), gCount = $("#gCount"), gHint = $("#gHint");
-    const places = [...new Set(P.map(p => p.place).filter(p => !/across/i.test(p)))];
-    $("#gLabel").innerHTML = `<b>01</b>12 photographs · ${places.length} places`;
-    $("#specPhotos").textContent = `12, my own, from ${places.join(", ")}`;
-    let step = 1, gAt = -1, gQueued = false;
-    gallery.style.backgroundColor = tint(P[0].tone);
-    function gRender() {
-      gQueued = false;
-      const f = rail.scrollLeft / step;
-      // neighbours sit a little smaller and dimmer than the centred page
-      slides.forEach((s, i) => {
-        const d = Math.min(1, Math.abs(f - i));
-        if (d === 1 && s._d === 1) return;
-        s._d = d;
-        s.style.transform = d ? `scale(${(1 - d * .08).toFixed(4)})` : "";
-        s.style.opacity = (1 - d * .55).toFixed(3);
-      });
-      const k = Math.max(0, Math.min(11, Math.round(f)));
-      if (k !== gAt) {
-        gAt = k; gCount.textContent = `${String(k + 1).padStart(2, "0")} / 12`;
-        ticks.forEach((t, i) => t.classList.toggle("on", i <= k));
-        $("#gPrev").disabled = k === 0; $("#gNext").disabled = k === 11;
-        figs.forEach((fg, i) => fg.classList.toggle("near", Math.abs(i - k) <= 1));
-        gallery.style.backgroundColor = tint(P[k].tone);
-        // decode the pages either side before they slide in
-        for (let j = k - 2; j <= k + 2; j++) if (imgs[j]) { imgs[j].loading = "eager"; if (imgs[j].decode) imgs[j].decode().catch(() => {}); }
-      }
-      if (f > .3) gHint.classList.add("done");
-    }
-    rail.addEventListener("scroll", () => { if (!gQueued) { gQueued = true; requestAnimationFrame(gRender); } }, { passive: true });
-    const gGo = k => rail.scrollTo({ left: Math.max(0, Math.min(11, k)) * step, behavior: Motion.reduced ? "auto" : "smooth" });
-    ticks.forEach((t, i) => t.addEventListener("click", () => gGo(i)));
-    $("#gPrev").addEventListener("click", () => gGo(gAt - 1));
-    $("#gNext").addEventListener("click", () => gGo(gAt + 1));
-    rail.addEventListener("keydown", e => { if (e.key === "ArrowRight") { e.preventDefault(); gGo(gAt + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); gGo(gAt - 1); } });
-    onMeasure(() => { step = figs[0].offsetWidth || 1; gRender(); });
+    $("#ticks").innerHTML = P.map((_, i) => `<button aria-label="${CAL.MONTHS[i]}"><b></b></button>`).join("");
+    const figs = $$(".slide", rail), btns = $$(".slide button", rail), imgs = $$(".slide img", rail), ticks = $$("#ticks button"), tickFill = $$("#ticks b");
+    const gCount = $("#gCount"), gPrev = $("#gPrev"), gNext = $("#gNext"), gHint = $("#gHint");
+    let step = 1, gAt = -1, gQ = false;
 
-    /* ------------------------------------------------------------ planner: swiping moves the camera with your finger */
-    const STEPS = [[0, 0, 700, 905], [40, 172, 420, 250], [466, 205, 206, 96], [332, 36, 342, 112], [22, 182, 150, 200], [44, 724, 384, 136]];
-    const view = $("#tourView");
-    const tour = PlannerTour({ view, frame: $("#tourFrame"), steps: STEPS, maxScale: 3.4, hold: 0, mark: $("#mark") });
-    const cards = $("#cards"), pHint = $("#pHint");
-    $("#segs").innerHTML = STEPS.map((_, i) => `<button aria-label="Feature ${i + 1}"><b></b></button>`).join("");
-    const segs = $$("#segs b");
-    let cw = 1, pAt = 0, pQueued = false, lastCardScroll = 0;
-    function pRender() {
-      pQueued = false;
-      const f = clamp(cards.scrollLeft / cw, 0, STEPS.length - 1);
-      tour.update(f / (STEPS.length - 1));
-      segs.forEach((s, k) => { s.style.transform = `scaleX(${clamp(f - k + 1).toFixed(3)})`; });
-      pAt = Math.round(f);
-      $("#pPrev").disabled = pAt === 0; $("#pNext").disabled = pAt === STEPS.length - 1;
-      if (f > .3) pHint.classList.add("done");
-    }
-    cards.addEventListener("scroll", () => { lastCardScroll = performance.now(); if (!pQueued) { pQueued = true; requestAnimationFrame(pRender); } }, { passive: true });
-    const pGo = k => cards.scrollTo({ left: Math.max(0, Math.min(STEPS.length - 1, k)) * cw, behavior: Motion.reduced ? "auto" : "smooth" });
-    $$("#segs button").forEach((b, i) => b.addEventListener("click", () => pGo(i)));
-    $("#pPrev").addEventListener("click", () => pGo(pAt - 1));
-    $("#pNext").addEventListener("click", () => pGo(pAt + 1));
-    cards.addEventListener("keydown", e => { if (e.key === "ArrowRight") { e.preventDefault(); pGo(pAt + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); pGo(pAt - 1); } });
-    // dragging the page scrubs the tour under your finger; a tap moves to the next feature
-    let drag = null, lastPageScroll = 0;
-    addEventListener("scroll", () => { lastPageScroll = performance.now(); }, { passive: true });
-    view.addEventListener("pointerdown", e => { drag = { x: e.clientX, y: e.clientY, left: cards.scrollLeft, moved: false, id: e.pointerId }; });
-    view.addEventListener("pointermove", e => {
-      if (!drag) return;
-      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-      if (!drag.moved && Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) { drag.moved = true; cards.style.scrollSnapType = "none"; try { view.setPointerCapture(drag.id); } catch (_) {} }
-      if (drag.moved) cards.scrollLeft = drag.left - dx * (cw / view.clientWidth) * 1.4;
+    /* ------------------------------------------------------------ nav: the colour of whatever is under it */
+    let heroEnd = 0, galleryEnd = 0, orderTop = 0;
+    onMeasure(vh => { heroEnd = top(hero) + hero.offsetHeight - vh; galleryEnd = top(gallery) + gallery.offsetHeight; orderTop = top($(".order")); });
+    const nav = Nav($("#nav"), y => {
+      const at = y + 28;
+      if (at < heroEnd) return heroDark ? { bg: NIGHT0, fg: IVORY } : { bg: "#f6f4ef", fg: INK };
+      if (at < galleryEnd) return { bg: tint.get() || NIGHT0, fg: IVORY };
+      return { bg: at >= orderTop ? "#faf8f4" : "#f4f1ea", fg: INK, line: true };
     });
-    const end = e => {
-      if (!drag) return;
-      const d = drag; drag = null;
-      if (d.moved) {
-        const f = cards.scrollLeft / cw, dir = Math.sign(cards.scrollLeft - d.left);
-        cards.style.scrollSnapType = "";
-        pGo(Math.abs(f - Math.round(f)) < .15 ? Math.round(f) : (dir > 0 ? Math.ceil(f) : Math.floor(f)));
-      } else if (e.type === "pointerup" && performance.now() - Math.max(lastCardScroll, lastPageScroll) > 150) {
-        pGo(pAt === STEPS.length - 1 ? 0 : pAt + 1);
+
+    function gRender() {
+      gQ = false;
+      const max = rail.scrollWidth - rail.clientWidth;
+      const k = rail.scrollLeft >= max - 2 ? 11 : clamp(Math.round(rail.scrollLeft / step), 0, 11);
+      if (k !== gAt) {
+        gAt = k;
+        figs.forEach((f, j) => f.classList.toggle("dim", j !== k));
+        // one photo at a time in the Tab order; arrow keys move between them
+        btns.forEach((b, j) => { b.tabIndex = j === k ? 0 : -1; });
+        tickFill.forEach((b, j) => { b.style.transform = j <= k ? "scaleX(1)" : "scaleX(0)"; });
+        ticks.forEach((t, j) => t.toggleAttribute("aria-current", j === k));
+        gCount.textContent = `${String(k + 1).padStart(2, "0")} / 12`;
+        gPrev.disabled = k === 0; gNext.disabled = k === 11;
+        tint.set(night(P[k].tone)); nav.refresh();
+        // decode the pages either side before they slide in
+        for (let j = k - 1; j <= k + 2; j++) if (imgs[j]) { imgs[j].loading = "eager"; if (imgs[j].decode) imgs[j].decode().catch(() => {}); }
       }
-    };
-    view.addEventListener("pointerup", end);
-    view.addEventListener("pointercancel", end);
-    // the full-size planner is only fetched as the section comes near
-    const big = $("#tourFrame img");
-    new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { big.loading = "eager"; if (big.decode) big.decode().catch(() => {}); io.disconnect(); } }, { rootMargin: "100% 0px" }).observe(view);
-    onMeasure(() => { tour.layout(); cw = cards.clientWidth || 1; pRender(); });
+      if (rail.scrollLeft > step * .3) gHint.classList.add("done");
+    }
+    rail.addEventListener("scroll", () => { if (!gQ) { gQ = true; requestAnimationFrame(gRender); } }, { passive: true });
+    const gGo = k => rail.scrollTo({ left: clamp(k, 0, 11) * step, behavior: smooth() });
+    ticks.forEach((t, i) => t.addEventListener("click", () => gGo(i)));
+    gPrev.addEventListener("click", () => gGo(gAt - 1));
+    gNext.addEventListener("click", () => gGo(gAt + 1));
+    // tap the page in front to see it larger; tap one beside it to bring it forward
+    rail.addEventListener("click", e => {
+      const f = e.target.closest(".slide"); if (!f) return;
+      const i = +f.dataset.i;
+      if (i === gAt) viewer().open(i, f.querySelector("button"), j => { if (j !== gAt) rail.scrollTo({ left: j * step }); });
+      else gGo(i);
+    });
+    rail.addEventListener("keydown", e => {
+      const k = { ArrowRight: gAt + 1, ArrowLeft: gAt - 1, Home: 0, End: 11 }[e.key];
+      if (k !== undefined) { e.preventDefault(); gGo(k); if (btns[clamp(k, 0, 11)]) btns[clamp(k, 0, 11)].focus({ preventScroll: true }); }
+    });
+    onMeasure(() => { step = figs[1].offsetLeft - figs[0].offsetLeft || 1; gAt = -1; gRender(); });
 
-    /* ------------------------------------------------------------ order: the calendar turns slowly, photo side out */
-    const cal2 = Calendar3D($("#orderCal"), { sheets: [CAL.DUPLEX[0]], stand: "white", blanks: 4 });
-    cal2.flip(0, 1);
-    scene($("#orderCalScene"), p => { cal2.view({ ry: lerp(200, 160, p), rx: -9 }); cal2.ground(1, .9); }, "view");
+    /* ------------------------------------------------------------ planner */
+    Planner($("#planner"));
 
-    Motion.ready(document.querySelectorAll(".hero img")).then(Motion.measure);
-    Motion.reveals();
+    /* ------------------------------------------------------------ order: the calendar turns slowly as you pass */
+    const cal2 = Calendar3D($("#orderCal"), { sheets: [CAL.DUPLEX[0]], stand: "white", blanks: 3 });
+    scene($("#orderCalScene"), p => { cal2.view({ ry: lerp(24, -22, p), rx: -9 }); cal2.ground(1, .9); }, "view");
+
+    Motion.ready(calEl.querySelectorAll("img")).then(Motion.measure);
   })();
   </script>
 </body>

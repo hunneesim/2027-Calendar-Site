@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>2027 Calendar · Story Graphics</title>
+  <title>Desk Calendar 2027 · Story graphics</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +46,7 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="eyebrow">2027 Calendar · Instagram Stories</div>
+      <div class="eyebrow">Desk Calendar 2027 · Instagram Stories</div>
       <h1>Two story graphics</h1>
       <p>Both are 1080 × 1920, the Instagram Stories size. Save them, post them in order, then add a link sticker to your order page in the empty space near the bottom.</p>
     </header>
@@ -157,11 +157,11 @@
     ctx.drawImage(img, -w / 2, -h / 2, w, h); ctx.restore();
   }
   function priceBlock(ctx, cy) {
-    // "RM 49 | Free shipping / Malaysia & Singapore", centred as one group
+    // "RM 49 | Free delivery / Malaysia & Singapore", centred as one group
     ctx.textBaseline = "alphabetic";
     ctx.font = `600 34px ${SANS}`; const rmW = ctx.measureText("RM").width;
     ctx.font = `600 124px ${SANS}`; const nW = ctx.measureText("49").width;
-    ctx.font = `600 34px ${SANS}`; const a = ctx.measureText("Free shipping").width;
+    ctx.font = `600 34px ${SANS}`; const a = ctx.measureText("Free delivery").width;
     ctx.font = `400 30px ${SANS}`; const b = ctx.measureText("Malaysia & Singapore").width;
     const left = rmW + 10 + nW, gap = 44, right = Math.max(a, b), total = left + gap * 2 + right;
     let x = W / 2 - total / 2;
@@ -169,7 +169,7 @@
     ctx.font = `600 124px ${SANS}`; ctx.fillText("49", x + rmW + 10, cy + 40);
     line(ctx, x + left + gap, cy - 62, x + left + gap, cy + 34, C.line, 2);
     const rx = x + left + gap * 2;
-    ctx.fillStyle = C.ink; ctx.font = `600 34px ${SANS}`; ctx.fillText("Free shipping", rx, cy - 14);
+    ctx.fillStyle = C.ink; ctx.font = `600 34px ${SANS}`; ctx.fillText("Free delivery", rx, cy - 14);
     ctx.fillStyle = C.ink2; ctx.font = `400 30px ${SANS}`; ctx.fillText("Malaysia & Singapore", rx, cy + 30);
   }
   function linkHint(ctx, y) {
@@ -206,8 +206,8 @@
     ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
     ctx.textBaseline = "alphabetic";
     ctx.fillStyle = C.brass; ctx.font = `600 26px ${SANS}`; spaced(ctx, "WHAT'S INSIDE", 80, 286, .26);
-    ctx.fillStyle = C.ink; ctx.font = `600 78px ${SANS}`; spaced(ctx, "Every month,", 80, 378, -.035);
-    ctx.font = `italic 400 66px ${SERIF}`; spaced(ctx, "a photo, then a planner.", 80, 458, -.02);
+    ctx.fillStyle = C.ink; ctx.font = `600 78px ${SANS}`; spaced(ctx, "Every month:", 80, 378, -.035);
+    ctx.font = `italic 400 66px ${SERIF}`; spaced(ctx, "a photo and a planner.", 80, 458, -.02);
 
     // planner on the left, numbered markers on it, legend on the right
     const px = 80, py = 510, pw = 520, s = pw / 700;
@@ -228,10 +228,10 @@
     });
     const legend = [
       ["Room to write", "Big date squares"],
-      ["Holidays marked", "Printed on the day"],
-      ["Last & next month", "At a glance"],
+      ["Holidays marked", "Malaysian, on the day"],
+      ["Months either side", "At a glance"],
       ["Week numbers", "Down the side"],
-      ["To-do & notes", "On every month"]
+      ["To-do and notes", "Every month"]
     ];
     const lx = 652, ly0 = 546, step = 128;
     legend.forEach(([t, sub], i) => {

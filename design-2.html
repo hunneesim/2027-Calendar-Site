@@ -330,7 +330,7 @@
     const mks = [...fig.querySelectorAll(".mk")];
     scene(fig, p => mks.forEach((m, i) => m.classList.toggle("on", p > .22 + i * .055)), "view");
 
-    const places = [...new Set(P.map(p => p.place).filter(p => !/across/i.test(p)))];
+    const places = CAL.places();
     $("#specPhotos").textContent = `Twelve, all my own, from ${places.length} places`;
 
     /* ------------------------------------------------------------ order */
