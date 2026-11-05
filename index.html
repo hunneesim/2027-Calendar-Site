@@ -66,7 +66,7 @@
     .hero h1 { font-size: clamp(29px, 7.6vw, 54px); line-height: 1.16; max-width: 15em; }
     .hero .sub { color: var(--ink-2); font-size: 14.5px; max-width: 30em; }
     .hero-cal { position: absolute; inset: 0; display: grid; place-items: center; will-change: transform; }
-    .hero-cal .c3 { --w: min(66vw, 37svh, 340px); }
+    .hero-cal .c3 { --w: min(60vw, 33svh, 320px); }
     .cap { position: absolute; left: 0; right: 0; bottom: calc(6.5svh + env(safe-area-inset-bottom, 0px)); padding: 0 var(--gutter); text-align: center; font-family: var(--serif); font-style: italic; font-size: clamp(19px, 5vw, 28px); line-height: 1.35; opacity: 0; will-change: opacity, transform; }
     .cue { position: absolute; left: 50%; bottom: calc(3.5svh + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: grid; justify-items: center; gap: 10px; font-size: 10px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
     .cue i { width: 1px; height: 34px; background: linear-gradient(var(--line), var(--line)); position: relative; overflow: hidden; }
@@ -276,7 +276,7 @@
       text.style.opacity = (1 - seg(p, 0, .1)).toFixed(3);
       text.style.transform = `translate3d(0, ${(-36 * intro).toFixed(1)}px, 0)`;
       cue.style.opacity = (1 - seg(p, 0, .04)).toFixed(3);
-      const y = lerp(H * .12, H * .015, intro), s = lerp(.82, 1.06, intro) + seg(p, .17, 1) * .05;
+      const y = lerp(H * .15, H * .02, intro), s = lerp(.8, 1.06, intro) + seg(p, .17, 1) * .05;
       wrap.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${s.toFixed(4)})`;
       cal.view({ ry: lerp(-30, -5, intro) + seg(p, .17, 1) * 11, rx: lerp(-11, -8, intro) });
       cal.ground(1, 1 - .12 * Math.abs(lerp(-30, -5, intro)) / 30);
