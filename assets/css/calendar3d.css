@@ -22,7 +22,8 @@
   -webkit-user-select: none; user-select: none;
 }
 .c3--black { --board: #161617; --board-edge: #0b0b0c; --back: #0f0f10; --ring: #1d1d1f; --ring-hi: #5d5d62; --hole: #2a2a2c; }
-.c3--white { --board: #fbfbfa; --board-edge: #e2e2e0; --back: #efefed; --ring: #1b1b1c; --ring-hi: #6a6a6e; }
+.c3--white { --board: #fbfbfa; --board-edge: #e2e2e0; --back: #f2f1ee; --ring: #1b1b1c; --ring-hi: #6a6a6e; }
+.c3--white .c3-back > .c3-plane { background: linear-gradient(180deg, #f7f6f3, #e7e5e0); }
 
 .c3-rig, .c3-front, .c3-back, .c3-sheet { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
 .c3-rig {
@@ -42,7 +43,6 @@
   position: absolute; left: calc((var(--bw) - var(--w)) / 2); top: 0;   /* hinged exactly at the binding */
   width: var(--w); height: var(--hs);
   transform-origin: 50% 0;
-  will-change: transform;
 }
 .c3-face {
   position: absolute; inset: 0; overflow: hidden; border-radius: 1px;
@@ -56,15 +56,19 @@
 .c3-blank .c3-face { background: #fbfaf7; }
 
 /* punched holes along the top of each sheet, lined up with the rings */
-.c3-holes { position: absolute; left: calc(var(--w) * .07); right: calc(var(--w) * .07); top: calc(var(--w) * .011); height: calc(var(--w) * .022); display: flex; justify-content: space-between; pointer-events: none; }
-.c3-holes i { width: calc(var(--w) * .017); height: 100%; border-radius: calc(var(--w) * .006); background: var(--hole); box-shadow: inset 0 calc(var(--w) * .003) calc(var(--w) * .004) rgba(0,0,0,.5); }
+/* one element per face: each tile is one ring's share of the width, with the hole drawn in its middle */
+.c3-holes {
+  position: absolute; left: calc(var(--w) * .062); right: calc(var(--w) * .062); top: calc(var(--w) * .011); height: calc(var(--w) * .022); pointer-events: none;
+  background: linear-gradient(90deg, transparent 33%, var(--hole) 33%, var(--hole) 67%, transparent 67%) 0 0 / calc(100% / var(--rings, 17)) 100% repeat-x;
+  border-radius: 1px;
+}
 .c3-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,8,5,.55), rgba(10,8,5,.18) 60%, rgba(10,8,5,.08)); opacity: 0; pointer-events: none; }
 
 /* wire-o rings, drawn as loops that rise over the top edge and drop into the holes */
 .c3-rings {
-  position: absolute; left: calc((var(--bw) - var(--w)) / 2 + var(--w) * .07); right: calc((var(--bw) - var(--w)) / 2 + var(--w) * .07);
+  position: absolute; left: calc((var(--bw) - var(--w)) / 2 + var(--w) * .062); right: calc((var(--bw) - var(--w)) / 2 + var(--w) * .062);
   top: calc(var(--w) * -.03); height: calc(var(--w) * .07);
-  display: flex; justify-content: space-between; pointer-events: none;
+  display: grid; grid-template-columns: repeat(var(--rings, 17), 1fr); justify-items: center; pointer-events: none;
   transform: translateZ(calc(var(--w) * .012));
 }
 .c3-rings i {
