@@ -7,7 +7,7 @@
 window.CAL = {
   ORDER_URL: "",
   PRICE: "RM 49",
-  DELIVERY: "Delivered free anywhere in Malaysia. Singapore: postage at cost.",
+  DELIVERY: "Free delivery within Malaysia. Outside Malaysia? Message me about postage.",
   SOON: "Orders open soon. I'll post on Instagram when they do.",
   PAGES: [
     { file: "assets/pages/p02.jpg", webp: "assets/pages/p02.webp", tone: "#479bbf", title: "Jade Dragon Snow Mountain", place: "Lijiang",
